@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+ <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+ <af:resource type="javascript">
+    function logoutHandler(event) {
+         var form = document.forms[0];
+         form.action = '/AssignmentFormApp-ViewController-context-root/logoutservlet';
+         form.submit();
+         event.cancel();
+     }
+
+     function backToHome(event) {
+         var form = document.forms[0];
+         form.action = '/AssignmentFormApp-ViewController-context-root/backtohomeservlet';
+         form.submit();
+         event.cancel();
+     }
+   
+ </af:resource>
+ <af:pageTemplateDef var="attrs">
+  <af:xmlContent>
+   <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+    <display-name>assignment_pagetemplate</display-name>
+    <facet>
+     <facet-name>editable</facet-name>
+    </facet>
+   </component>
+  </af:xmlContent>
+  <af:panelStretchLayout id="pt_psl199" topHeight="20px" bottomHeight="0px">
+   <f:facet name="top">
+    <af:panelGroupLayout id="pgl199" layout="scroll"
+                         inlineStyle="background-color:ActiveCaption;">
+     <af:panelGroupLayout id="pgl299" layout="horizontal"
+                          inlineStyle="background-color:ActiveCaption; display:block;">
+      <af:panelGroupLayout id="pgl099" layout="horizontal" halign="left"
+                           inlineStyle="float:left">
+       <af:spacer width="10" height="10" id="s499"/>
+       <af:outputText id="ot299" value="Assignment Form V1.1"
+                      inlineStyle="font-weight:bold; color:black;"/>
+       <af:outputText id="ot399" value="|"
+                      inlineStyle="font-weight:bold; color:black;"/>
+       <af:commandLink text="Back to E-Business Suite" id="cl199"
+                       immediate="true"
+                       inlineStyle="font-weight:bold; color:Navy; text-decoration:underline;">
+        <af:clientListener type="action" method="backToHome"/>
+       </af:commandLink>
+      </af:panelGroupLayout>
+      <af:spacer width="800" height="5" id="s199"/>
+      <af:panelGroupLayout id="pgl399" layout="horizontal">
+       <af:outputText value="Welcome : #{sessionScope.currentUser}" id="ot199"
+                      inlineStyle="color:Blue;font-weight:bold;"/>
+       <af:spacer width="20" height="5" id="s299"/>
+       <af:commandLink text="Logout" id="cl299" immediate="true"
+                       inlineStyle="font-weight:bold; color:White; text-decoration:underline;">
+        <af:clientListener type="action" method="logoutHandler"/>
+       </af:commandLink>
+       <af:spacer width="5" height="5" id="s399"/>
+      </af:panelGroupLayout>
+     </af:panelGroupLayout>
+    </af:panelGroupLayout>
+   </f:facet>
+   <f:facet name="center">
+    <af:facetRef facetName="editable"></af:facetRef>
+   </f:facet>
+   <f:facet name="bottom"></f:facet>
+  </af:panelStretchLayout>
+ </af:pageTemplateDef>
+</jsp:root>

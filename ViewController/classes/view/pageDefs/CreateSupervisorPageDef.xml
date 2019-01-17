@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="CreateSupervisorPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SupervisorNameLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="SupervisorNameLOVVO1Iterator"/>
+    <iterator Binds="WorkerNumberLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="WorkerNumberLOVVO1Iterator"/>
+    <iterator Binds="AssignmentNumberLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AssignmentNumberLOVVO1Iterator"/>
+    <iterator Binds="AdditionalSupervisorVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AdditionalSupervisorVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="SupervisorNameLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="SupervisorNameLOVVO1Iterator" id="SupervisorNameLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="WorkerNumberLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="WorkerNumberLOVVO1Iterator" id="WorkerNumberLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="WorkerNumber"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="AssignmentNumberLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="AssignmentNumberLOVVO1Iterator" id="AssignmentNumberLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="AssignmentNumber"/>
+      </AttrNames>
+    </list>
+    <tree IterBinding="AdditionalSupervisorVO1Iterator"
+          id="AdditionalSupervisorVO1">
+      <nodeDefinition DefName="esr.nhs.pvo.AdditionalSupervisorVO"
+                      Name="AdditionalSupervisorVO10">
+        <AttrNames>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="SupervisorName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="AdditionalSupervisorVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="AdditionalSupervisorVO1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="updateAssignmentFormPageDef"
+                Package="pages">
+  <parameters/>
+  <executables>
+   <variableIterator id="variables"/>
+    <iterator id="AssignmentSearchVO1Iterator" Binds="AssignmentSearchVO1"
+              DataControl="NHS_AssignmentAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="ChangeReasonLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="ChangeReasonLOVVO1Iterator"/>
+    <iterator Binds="AdditionalSupervisorVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AdditionalSupervisorVO1Iterator"/>
+    <iterator Binds="AdditionalSupervisorsVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AdditionalSupervisorsVO1Iterator"/>
+    <iterator Binds="DateTrackHistoryVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="DateTrackHistoryVO1Iterator"/>
+    <iterator Binds="PaypointLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="PaypointLOVVO1Iterator"/>
+    <iterator Binds="ExpenseUserTypeLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="ExpenseUserTypeLOVVO1Iterator"/>
+    <iterator Binds="TimeAndAttendanceLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="TimeAndAttendanceLOVVO1Iterator"/>
+    <iterator Binds="DataEntryGroupLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="DataEntryGroupLOVVO1Iterator"/>
+    <iterator Binds="GradeStepPlacementVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="GradeStepPlacementVO1Iterator"/>
+  </executables>
+  <bindings>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_OrganizationName" id="OrganizationName"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_PositionName" id="PositionName"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_GradeName" id="GradeName"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="OrganizationId">
+      <AttrNames>
+        <Item Value="OrganizationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="GradeId">
+      <AttrNames>
+        <Item Value="GradeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="LocationId">
+      <AttrNames>
+        <Item Value="LocationId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="JobId">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="PayrollId">
+      <AttrNames>
+        <Item Value="PayrollId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_LocationCode" id="LocationCode"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="PositionId">
+      <AttrNames>
+        <Item Value="PositionId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_JobName" id="JobName"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="NhsJobApplRef">
+      <AttrNames>
+        <Item Value="NhsJobApplRef"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_PayrollName" id="PayrollName" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="VacancyId">
+      <AttrNames>
+        <Item Value="VacancyId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="AssignmentSearchVO1Iterator" id="PrimaryFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="FullName">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="EmployeeCategory">
+      <AttrNames>
+        <Item Value="EmployeeCategory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AssignmentCategory">
+      <AttrNames>
+        <Item Value="AssignmentCategory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AssignmentStatusTypeId">
+      <AttrNames>
+        <Item Value="AssignmentStatusTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AssignmentEffStartDate">
+      <AttrNames>
+        <Item Value="AssignmentEffStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AssignmentEffEndDate">
+      <AttrNames>
+        <Item Value="AssignmentEffEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="WorkingHours">
+      <AttrNames>
+        <Item Value="WorkingHours"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_Frequency" id="Frequency" DTSupportsMRU="true"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_HourlySalariedCode" id="HourlySalariedCode"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="TimeNormalStart">
+      <AttrNames>
+        <Item Value="TimeNormalStart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="TimeNormalFinish">
+      <AttrNames>
+        <Item Value="TimeNormalFinish"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="AssignmentSearchVO1Iterator" id="WorkAtHome"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="WorkAtHome"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="NoticePeriodLength">
+      <AttrNames>
+        <Item Value="NoticePeriodLength"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_NoticePeriodUnits" id="NoticePeriodUnits"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="FixedTermEndDate">
+      <AttrNames>
+        <Item Value="FixedTermEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_FixedTermReason" id="FixedTermReason" DTSupportsMRU="true"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_LocalEmpContract" id="LocalEmpContract"
+          DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_NewDeal" id="NewDeal" DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_JobSharer" id="JobSharer" DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_NightWorker" id="NightWorker" DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_FlexibleWorkingPattern" id="FlexibleWorkingPattern"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AvgWorkingDaysPerweek">
+      <AttrNames>
+        <Item Value="AvgWorkingDaysPerweek"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_MaximumParttime" id="MaximumParttime"
+          DTSupportsMRU="false"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="FoundationGatewayDate">
+      <AttrNames>
+        <Item Value="FoundationGatewayDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AbsAccrualStartDate">
+      <AttrNames>
+        <Item Value="AbsAccrualStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="StartDateGrade">
+      <AttrNames>
+        <Item Value="StartDateGrade"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="BankProposIncDate">
+      <AttrNames>
+        <Item Value="BankProposIncDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_MonitorChanges" id="MonitorChanges" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="OverrideStdGradeHours">
+      <AttrNames>
+        <Item Value="OverrideStdGradeHours"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="OverrideStdGradeOtRate">
+      <AttrNames>
+        <Item Value="OverrideStdGradeOtRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="OverrideStdGradeOtHours">
+      <AttrNames>
+        <Item Value="OverrideStdGradeOtHours"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="UpliftedRateChDt">
+      <AttrNames>
+        <Item Value="UpliftedRateChDt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_ExitQuestionerReq" id="ExitQuestionerReq"
+          DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_PayslipToHome" id="PayslipToHome" DTSupportsMRU="false"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_AccomidationStatus" id="AccomidationStatus"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="Funding1">
+      <AttrNames>
+        <Item Value="Funding1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="Funding1Percent">
+      <AttrNames>
+        <Item Value="Funding1Percent"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="Funding2">
+      <AttrNames>
+        <Item Value="Funding2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="Funding2Percent">
+      <AttrNames>
+        <Item Value="Funding2Percent"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="IncrementaDate">
+      <AttrNames>
+        <Item Value="IncrementaDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="NoOfIncrements">
+      <AttrNames>
+        <Item Value="NoOfIncrements"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="FullTimeSalary">
+      <AttrNames>
+        <Item Value="FullTimeSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="PartTimeSalary">
+      <AttrNames>
+        <Item Value="PartTimeSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="HourlyRate">
+      <AttrNames>
+        <Item Value="HourlyRate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AdditionalSupervisorVO1Iterator"
+                     id="FromDate">
+      <AttrNames>
+        <Item Value="FromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AdditionalSupervisorVO1Iterator" id="ToDate">
+      <AttrNames>
+        <Item Value="ToDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AdditionalSupervisorVO1Iterator"
+                     id="SupervisorName">
+      <AttrNames>
+        <Item Value="SupervisorName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="ProbationPeriod">
+      <AttrNames>
+        <Item Value="ProbationPeriod"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="DateProbationEnd">
+      <AttrNames>
+        <Item Value="DateProbationEnd"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_ProbationUnit" id="ProbationUnit" DTSupportsMRU="true"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_AssignmentNumber" id="AssignmentNumber"/>
+    <tree IterBinding="AdditionalSupervisorsVO1Iterator"
+          id="AdditionalSupervisorsVO1">
+      <nodeDefinition DefName="esr.nhs.vo.AdditionalSupervisorsVO"
+                      Name="AdditionalSupervisorsVO10">
+        <AttrNames>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="FullName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="AdditionalSupervisorsVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="AdditionalSupervisorsVO1Iterator"
+                     id="FromDate1">
+      <AttrNames>
+        <Item Value="FromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AdditionalSupervisorsVO1Iterator"
+                     id="ToDate1">
+      <AttrNames>
+        <Item Value="ToDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_SpecialCeilingStepId" id="SpecialCeilingStepId"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="SpecialCeilingStep">
+      <AttrNames>
+        <Item Value="SpecialCeilingStep"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_PayBasisId" id="PayBasisId" DTSupportsMRU="true"/>
+    <listOfValues StaticList="false"
+                  IterBinding="AdditionalSupervisorsVO1Iterator"
+                  Uses="LOV_PersonId" id="PersonId"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_SupervisorName" id="SupervisorName1"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_SupervisorEmployeeNumber"
+                  id="SupervisorEmployeeNumber"/>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_SupervisorAssignmentNumber"
+                  id="SupervisorAssignmentNumber"/>
+    <tree IterBinding="DateTrackHistoryVO1Iterator" id="DateTrackHistoryVO1">
+      <nodeDefinition DefName="esr.nhs.vo.DateTrackHistoryVO"
+                      Name="DateTrackHistoryVO10">
+        <AttrNames>
+          <Item Value="PeopleEffStartDate"/>
+          <Item Value="PeopleEffEndDate"/>
+          <Item Value="AssignmentEffStartDate"/>
+          <Item Value="AssignmentEffEndDate"/>
+          <Item Value="AssignmentId"/>
+          <Item Value="ChangeReason"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="NormalHours"/>
+          <Item Value="WorkingHoursFrequency"/>
+          <Item Value="PositionName"/>
+          <Item Value="OrganizationName"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="UserStatus"/>
+          <Item Value="GradeName"/>
+          <Item Value="LocationCode"/>
+          <Item Value="PayrollName"/>
+          <Item Value="PeopleGroup"/>
+          <Item Value="Supervisor"/>
+          <Item Value="Manager"/>
+          <Item Value="SpecialCeilingStepId"/>
+          <Item Value="NormalEndTime"/>
+          <Item Value="NormalStartTime"/>
+          <Item Value="ProbationEndDate"/>
+          <Item Value="ProbationPeriod"/>
+          <Item Value="ProbationUnit"/>
+          <Item Value="RecruitmentActivityId"/>
+          <Item Value="VacancyId"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="EmploymentCategory"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="PaypointLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="PaypointLOVVO1Iterator" id="PaypointLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="LocationCode"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ExpenseUserTypeLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="ExpenseUserTypeLOVVO1Iterator" id="ExpenseUserTypeLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="TimeAndAttendanceLOVVO1Iterator"
+          ListOperMode="navigation" ListIter="TimeAndAttendanceLOVVO1Iterator"
+          id="TimeAndAttendanceLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="DataEntryGroupLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="DataEntryGroupLOVVO1Iterator" id="DataEntryGroupLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_UserStatus" id="UserStatus" DTSupportsMRU="true"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_EmpCategoryMeaning" id="EmpCategoryMeaning"
+          DTSupportsMRU="true"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_ChangeReason" id="ChangeReason" DTSupportsMRU="true"/>
+    <list IterBinding="AssignmentSearchVO1Iterator" StaticList="false"
+          Uses="LOV_EmploymentCategory" id="EmploymentCategory"
+          DTSupportsMRU="true"/>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="AsgCategoryMeaning">
+      <AttrNames>
+        <Item Value="AsgCategoryMeaning"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="SupervisorId">
+      <AttrNames>
+        <Item Value="SupervisorId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="GroupName">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="AssignmentSearchVO1Iterator"
+            id="SupervisorManagerFlag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SupervisorManagerFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="AssignmentSearchVO1Iterator" id="ManagerFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ManagerFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues StaticList="false" IterBinding="AssignmentSearchVO1Iterator"
+                  Uses="LOV_DeptMgrOverrideName" id="DeptMgrOverrideName"/>
+    <list IterBinding="GradeStepPlacementVO1Iterator" StaticList="false"
+          Uses="LOV_ReasonCode" id="ReasonCode" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="GradeStepPlacementVO1Iterator"
+                     id="EffectiveStartDate">
+      <AttrNames>
+        <Item Value="EffectiveStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="GradeStepPlacementVO1Iterator"
+                     id="EffectiveEndDate">
+      <AttrNames>
+        <Item Value="EffectiveEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="GradeStepPlacementVO1Iterator"
+                  Uses="LOV_Point" id="Point"/>
+    <attributeValues IterBinding="GradeStepPlacementVO1Iterator" id="Step">
+      <AttrNames>
+        <Item Value="Step"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

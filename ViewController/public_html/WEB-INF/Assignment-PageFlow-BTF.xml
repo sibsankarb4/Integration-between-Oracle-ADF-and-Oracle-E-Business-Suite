@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Assignment-PageFlow-BTF">
+    <default-activity id="__1">AssignmentsSearch</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name id="__4">AssignmentSearchBean</managed-bean-name>
+      <managed-bean-class id="__2">esr.nhs.bean.AssignmentSearchBean</managed-bean-class>
+      <managed-bean-scope id="__5">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__18">
+      <managed-bean-name id="__19">AssignmentCreateBean</managed-bean-name>
+      <managed-bean-class id="__17">esr.nhs.bean.AssignmentCreateBean</managed-bean-class>
+      <managed-bean-scope id="__16">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__10">
+      <managed-bean-name id="__8">CoreFormNavigationBean</managed-bean-name>
+      <managed-bean-class id="__9">esr.nhs.bean.CoreFormNavigationBean</managed-bean-class>
+      <managed-bean-scope id="__11">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="AssignmentsSearch">
+      <page>/pages/AssignmentsSearch.jsff</page>
+    </view>
+    <view id="CreateAssignmentForm">
+      <page>/pages/CreateAssignmentForm.jsff</page>
+    </view>
+    <view id="AssignmentForm">
+      <page>/pages/AssignmentForm.jsff</page>
+    </view>
+    <control-flow-rule id="__6">
+      <from-activity-id id="__7">AssignmentsSearch</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome id="__30">CreateUpdateAssignment</from-outcome>
+        <to-activity-id id="__28">AssignmentForm</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id id="__32">AssignmentForm</from-activity-id>
+      <control-flow-case id="__33">
+        <from-outcome id="__35">backToAssignmentSearch</from-outcome>
+        <to-activity-id id="__34">AssignmentsSearch</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome id="__14">refresh</from-outcome>
+        <to-activity-id id="__13">AssignmentForm</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

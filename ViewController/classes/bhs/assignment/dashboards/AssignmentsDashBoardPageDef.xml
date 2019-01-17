@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="AssignmentsDashBoardPageDef"
+                Package="nhs.assignment.dashboards">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="AssignmentPageFlowBTF1"
+              taskFlowId="/WEB-INF/Assignment-PageFlow-BTF.xml#Assignment-PageFlow-BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

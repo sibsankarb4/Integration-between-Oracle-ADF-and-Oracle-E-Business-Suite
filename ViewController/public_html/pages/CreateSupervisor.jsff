@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="horizontal" >
+    <af:panelGroupLayout id="pgl2" layout="vertical"  halign="right" 
+                               inlineStyle="margin:20px 80px 20px 80px;border:1px solid #6699cc;">
+    
+      <af:panelHeader text="Primary" id="ph1" >
+        <af:selectOneChoice value="#{bindings.SupervisorNameLOVVO1.inputValue}"
+                            label="Name"
+                            contentStyle="width:225.00px;height:18px;"
+                            id="soc1">
+          <f:selectItems value="#{bindings.SupervisorNameLOVVO1.items}"
+                         id="si1"/>
+        </af:selectOneChoice>
+          <af:spacer width="10" height="10" id="s58"/>
+        <af:selectOneChoice value="#{bindings.WorkerNumberLOVVO1.inputValue}"
+                            label="Worker Number"
+                             contentStyle="width:225.00px;height:18px;"
+                            id="soc2">
+          <f:selectItems value="#{bindings.WorkerNumberLOVVO1.items}" id="si2"/>
+        </af:selectOneChoice>
+         <af:spacer width="10" height="10" id="s1"/>
+        <af:selectOneChoice value="#{bindings.AssignmentNumberLOVVO1.inputValue}"
+                            label="Assignment Number"
+                           contentStyle="width:225.00px;height:18px;"
+                            id="soc3">
+          <f:selectItems value="#{bindings.AssignmentNumberLOVVO1.items}"
+                         id="si3"/>
+        </af:selectOneChoice>
+                 <af:spacer width="10" height="10" id="s4"/>
+
+        <af:panelGroupLayout id="pgl4" layout="horizontal">
+        <af:selectBooleanCheckbox disabled="false" label="Manager"  id="sbc1" />
+         <af:spacer width="210" height="10" id="s2"/>
+          </af:panelGroupLayout>
+      </af:panelHeader>
+      <af:panelGroupLayout id="pgl5" layout="horizontal">
+      <af:commandButton text="Save" id="cb1"/>
+       <af:spacer height="5" width="5" id="s7"/>
+         </af:panelGroupLayout>
+      <af:spacer width="5" height="5" id="s5"/>
+    </af:panelGroupLayout>
+    <af:spacer width="50" height="10" id="s57"/>
+      <af:panelGroupLayout id="pgl3" layout="vertical"  halign="right" 
+                               inlineStyle="margin:20px 80px 20px 80px;border:1px solid #6699cc;">
+         <af:panelHeader text="Additional Supervisors" id="ph2" >
+      <af:table value="#{bindings.AdditionalSupervisorVO1.collectionModel}"
+                var="row" rows="#{bindings.AdditionalSupervisorVO1.rangeSize}"
+                emptyText="#{bindings.AdditionalSupervisorVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.AdditionalSupervisorVO1.rangeSize}"
+                rowBandingInterval="1" width="600px" columnStretching="column:c2"
+              inlineStyle="height:100px" scrollPolicy="page" autoHeightRows="0"
+                selectedRowKeys="#{bindings.AdditionalSupervisorVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.AdditionalSupervisorVO1.collectionModel.makeCurrent}"
+                rowSelection="single" id="t1" partialTriggers="::cb2">
+        <af:column sortable="false" width="120px"
+                   headerText="From Date"
+                   id="c3">
+          <af:inputDate value="#{row.bindings.FromDate.inputValue}"
+                        label="#{bindings.AdditionalSupervisorVO1.hints.FromDate.label}"
+                        required="#{bindings.AdditionalSupervisorVO1.hints.FromDate.mandatory}"
+                        shortDesc="#{bindings.AdditionalSupervisorVO1.hints.FromDate.tooltip}"
+                        id="id1">
+            <f:validator binding="#{row.bindings.FromDate.validator}"/>
+            <af:convertDateTime messageDetailConvertDate="Insert a date"
+                              pattern="dd-MMM-yyyy"
+                              hintDate="Example: DD-MON-YYYY"/>
+          </af:inputDate>
+        </af:column>
+        <af:column sortable="false" width="120px"
+                   headerText="To Date"
+                   id="c1">
+          <af:inputDate value="#{row.bindings.ToDate.inputValue}"
+                        label="#{bindings.AdditionalSupervisorVO1.hints.ToDate.label}"
+                        required="#{bindings.AdditionalSupervisorVO1.hints.ToDate.mandatory}"
+                        shortDesc="#{bindings.AdditionalSupervisorVO1.hints.ToDate.tooltip}"
+                        id="id2">
+            <f:validator binding="#{row.bindings.ToDate.validator}"/>
+            <af:convertDateTime messageDetailConvertDate="Insert a date"
+                              pattern="dd-MMM-yyyy"
+                              hintDate="Example: DD-MON-YYYY"/>
+          </af:inputDate>
+        </af:column>
+        <af:column sortable="false"
+                   headerText="Supervisor Name"
+                   id="c2">
+          <af:selectOneChoice value="#{bindings.SupervisorNameLOVVO1.inputValue}"
+                              label="Name"
+                              
+                              id="soc4">
+            <f:selectItems value="#{bindings.SupervisorNameLOVVO1.items}"
+                           id="si4"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortable="false" headerText="Update" id="c4" width="40px">
+          <af:commandImageLink text="" id="cil1" icon="/images/edit.jpg"/>
+        </af:column>
+        <af:column sortable="false" headerText="Delete" id="c5" width="40px">
+            <af:commandImageLink actionListener="#{bindings.Delete.execute}"
+                                 text=""
+                                 id="cil3"
+                                 icon="/images/delete.jpg" />
+        </af:column>
+      </af:table>
+       <af:spacer width="20" height="20" id="s3"/>
+       </af:panelHeader>
+       <af:panelGroupLayout id="pgl6" layout="horizontal">
+      <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                        text="Add Supervisors"
+                        disabled="#{!bindings.CreateInsert.enabled}" id="cb2"/>
+                        
+                        <af:spacer height="5" width="5" id="s6"/>
+         </af:panelGroupLayout>
+         <af:spacer height="5" width="5" id="s8"/>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CreateAssignment-BTF-Test">
+    <default-activity id="__1">CreateAssignmentForm</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__3">AssignmentCreateBean</managed-bean-name>
+      <managed-bean-class id="__4">esr.nhs.bean.AssignmentCreateBean</managed-bean-class>
+      <managed-bean-scope id="__2">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name id="__8">AssignmentSearchBean</managed-bean-name>
+      <managed-bean-class id="__7">esr.nhs.bean.AssignmentSearchBean</managed-bean-class>
+      <managed-bean-scope id="__6">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="CreateAssignmentForm">
+      <page>/pages/CreateAssignmentForm.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

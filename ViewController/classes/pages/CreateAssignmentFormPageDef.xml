@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="CreateAssignmentFormPageDef"
+                Package="pages">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AssignmentSearchVO1" RangeSize="10"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AssignmentSearchVO1Iterator"/>
+    <iterator Binds="OrganizationsLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="OrganizationsLOVVO1Iterator"/>
+    <iterator Binds="PositionLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="PositionLOVVO1Iterator"/>
+    <iterator Binds="GradeLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="GradeLOVVO1Iterator"/>
+    <iterator Binds="LocationLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="LocationLOVVO1Iterator"/>
+    <iterator Binds="AssignmentCategoryLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AssignmentCategoryLOVVO1Iterator"/>
+    <iterator Binds="ChangeReasonLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="ChangeReasonLOVVO1Iterator"/>
+    <iterator Binds="JobLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="JobLOVVO1Iterator"/>
+    <iterator Binds="PayrollLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="PayrollLOVVO1Iterator"/>
+    <iterator Binds="AssignmentStatusLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AssignmentStatusLOVVO1Iterator"/>
+    <iterator Binds="EmployeeCategoryLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="EmployeeCategoryLOVVO1Iterator"/>
+    <iterator Binds="PaypointLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="PaypointLOVVO1Iterator"/>
+    <iterator Binds="ExpenseUserTypeLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="ExpenseUserTypeLOVVO1Iterator"/>
+    <iterator Binds="TimeAndAttendanceLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="TimeAndAttendanceLOVVO1Iterator"/>
+    <iterator Binds="FrequencyLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="FrequencyLOVVO1Iterator"/>
+    <iterator Binds="HourlySalariedLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="HourlySalariedLOVVO1Iterator"/>
+    <iterator Binds="NoticePeriodUnitLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="NoticePeriodUnitLOVVO1Iterator"/>
+    <iterator Binds="ProbationPeriodUnitsLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="ProbationPeriodUnitsLOVVO1Iterator"/>
+    <iterator Binds="DataEntryGroupLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="DataEntryGroupLOVVO1Iterator"/>
+    <iterator Binds="FixedTermTempConReasonLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="FixedTermTempConReasonLOVVO1Iterator"/>
+    <iterator Binds="FlexibleWorkingPatternLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="FlexibleWorkingPatternLOVVO1Iterator"/>
+    <iterator Binds="DepartmentManagerOverriderLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="DepartmentManagerOverriderLOVVO1Iterator"/>
+    <iterator Binds="AccommodationStatusLOVVO1" RangeSize="25"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AccommodationStatusLOVVO1Iterator"/>
+    <taskFlow id="SupervisorBTF1"
+              taskFlowId="/WEB-INF/Supervisor-BTF.xml#Supervisor-BTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="FullName">
+      <AttrNames>
+        <Item Value="FullName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="OrganizationsLOVVO1Iterator"
+                  id="Name" Uses="LOV_Name"/>
+    <listOfValues StaticList="false" IterBinding="PositionLOVVO1Iterator"
+                  Uses="LOV_Name" id="Name1"/>
+    <listOfValues StaticList="false" IterBinding="GradeLOVVO1Iterator"
+                  Uses="LOV_Name" id="Name2"/>
+    <listOfValues StaticList="false" IterBinding="LocationLOVVO1Iterator"
+                  Uses="LOV_LocationCode" id="LocationCode"/>
+    <list IterBinding="AssignmentCategoryLOVVO1Iterator"
+          ListOperMode="navigation" ListIter="AssignmentCategoryLOVVO1Iterator"
+          id="AssignmentCategoryLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator"
+                     id="NhsJobApplRef">
+      <AttrNames>
+        <Item Value="NhsJobApplRef"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ChangeReasonLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="ChangeReasonLOVVO1Iterator" id="ChangeReasonLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <listOfValues StaticList="false" IterBinding="JobLOVVO1Iterator"
+                  Uses="LOV_JobName" id="JobName"/>
+    <list IterBinding="PayrollLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="PayrollLOVVO1Iterator" id="PayrollLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="PayrollName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="AssignmentStatusLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="AssignmentStatusLOVVO1Iterator" id="AssignmentStatusLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="UserStatus"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="EmployeeCategoryLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="EmployeeCategoryLOVVO1Iterator" id="EmployeeCategoryLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="AssignmentSearchVO1Iterator" id="VacancyId">
+      <AttrNames>
+        <Item Value="VacancyId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="AssignmentSearchVO1Iterator" id="PrimaryFlag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="PaypointLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="PaypointLOVVO1Iterator" id="PaypointLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="LocationCode"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ExpenseUserTypeLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="ExpenseUserTypeLOVVO1Iterator" id="ExpenseUserTypeLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="TimeAndAttendanceLOVVO1Iterator"
+          ListOperMode="navigation" ListIter="TimeAndAttendanceLOVVO1Iterator"
+          id="TimeAndAttendanceLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="FrequencyLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="FrequencyLOVVO1Iterator" id="FrequencyLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="HourlySalariedLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="HourlySalariedLOVVO1Iterator" id="HourlySalariedLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="NoticePeriodUnitLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="NoticePeriodUnitLOVVO1Iterator" id="NoticePeriodUnitLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ProbationPeriodUnitsLOVVO1Iterator"
+          ListOperMode="navigation"
+          ListIter="ProbationPeriodUnitsLOVVO1Iterator"
+          id="ProbationPeriodUnitsLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Meaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="DataEntryGroupLOVVO1Iterator" ListOperMode="navigation"
+          ListIter="DataEntryGroupLOVVO1Iterator" id="DataEntryGroupLOVVO1"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="FixedTermTempConReasonLOVVO1Iterator"
+          ListOperMode="navigation"
+          ListIter="FixedTermTempConReasonLOVVO1Iterator"
+          id="FixedTermTempConReasonLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="FlexibleWorkingPatternLOVVO1Iterator"
+          ListOperMode="navigation"
+          ListIter="FlexibleWorkingPatternLOVVO1Iterator"
+          id="FlexibleWorkingPatternLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="DepartmentManagerOverriderLOVVO1Iterator"
+          ListOperMode="navigation"
+          ListIter="DepartmentManagerOverriderLOVVO1Iterator"
+          id="DepartmentManagerOverriderLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="AccommodationStatusLOVVO1Iterator"
+          ListOperMode="navigation" ListIter="AccommodationStatusLOVVO1Iterator"
+          id="AccommodationStatusLOVVO1" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="FlexValueMeaning"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

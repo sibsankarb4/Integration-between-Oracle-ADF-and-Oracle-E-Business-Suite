@@ -1,0 +1,1353 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pfl1" layout="scroll">
+    <!-- <af:outputText id="ot2"
+                   value="Click on Update button to 'Update' Assignment Details, or Click on next/below tabs to update other details related to this assignment."
+                   inlineStyle="color:Blue; font-style:italic; font-weight:bold; text-decoration:underline;" rendered="#{pageFlowScope.AssignmentCreateBean.futureChangesPresentMessage}"/>-->
+    <af:panelAccordion id="pa1" styleClass="AFStretchWidth"
+                       dimensionsFrom="auto" discloseMany="false">
+      <af:showDetailItem text="Assignment Details #{sessionScope.assignmentHeaderBanner}"
+                         id="sdi1" disclosed="true" disabled="false">
+        <af:panelHeader text="Effective Dates" id="ph2"
+                        inlineStyle="border:1px solid #6699cc;margin:5px 10px 0px 10px">
+          <af:spacer width="10" height="10" id="s72"/>
+          <af:panelGroupLayout id="pgl2" layout="horizontal" valign="top"
+                               styleClass="AFStretchWidth">
+            <af:spacer width="30" height="10" id="s5"/>
+            <af:inputDate value="#{bindings.AssignmentEffStartDate.inputValue}"
+                          columns="12" autoSubmit="true"
+                          contentStyle="width:175px" label="From Date" id="id1"
+                          disabled="true">
+              <f:validator binding="#{bindings.AssignmentEffStartDate.validator}"/>
+              <af:convertDateTime messageDetailConvertDate="Insert a From Date"
+                                  pattern="dd-MMM-yyyy"
+                                  hintDate="Example: DD-MON-YYYY"/>
+            </af:inputDate>
+            <af:spacer width="40" height="10" id="s25"/>
+            <af:inputDate value="#{bindings.AssignmentEffEndDate.inputValue}"
+                          columns="12" label="To Date" autoSubmit="true"
+                          contentStyle="width:175px" id="id2" disabled="true">
+              <f:validator binding="#{bindings.AssignmentEffEndDate.validator}"/>
+              <af:convertDateTime messageDetailConvertDate="Insert a To Date"
+                                  pattern="dd-MMM-yyyy"
+                                  hintDate="Example: DD-MON-YYYY"/>
+            </af:inputDate>
+          </af:panelGroupLayout>
+          <af:spacer width="350" height="15" id="s1"/>
+          <af:outputText value="PLEASE NOTE: You are not on the current record - future changes are present"
+                         id="ot35" inlineStyle="font-weight:bold;color:red;"
+                         rendered="#{pageFlowScope.AssignmentCreateBean.futureChangesPresentMessage}"/>
+        </af:panelHeader>
+        <af:panelGroupLayout id="pgl3" layout="vertical"
+                             inlineStyle="margin:5px 10px 0px 10px">
+          <af:spacer width="5" height="5" id="s3"/>
+          <af:panelTabbed id="pt1" styleClass="AFStretchWidth"
+                          inlineStyle="height:300px;">
+            <!--  Start :: Create Assignment :: Basic Assignment Details   -->
+            <af:showDetailItem text="Basic Assignment Details" id="sdi3">
+              <af:panelHeader text="" id="ph8" styleClass="borderedHeader">
+                <af:panelFormLayout id="pfl4" rows="7">
+                  <af:inputListOfValues id="organizationNameId"
+                                        popupTitle="Search and Select: #{bindings.OrganizationName.hints.label}"
+                                        value="#{bindings.OrganizationName.inputValue}"
+                                        label="#{bindings.OrganizationName.label}"
+                                        required="true"
+                                        model="#{bindings.OrganizationName.listOfValuesModel}"
+                                        columns="65" contentStyle="height:16px;"
+                                        valueChangeListener="#{pageFlowScope.AssignmentCreateBean.organizationChangeListener}"
+                                        autoSubmit="true"
+                                        partialTriggers="positionNameId"
+                                        binding="#{pageFlowScope.AssignmentCreateBean.organizationNameBind}">
+                    <f:validator binding="#{bindings.OrganizationName.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.OrganizationName.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputListOfValues id="positionNameId"
+                                        popupTitle="Search and Select: #{bindings.PositionName.hints.label}"
+                                        value="#{bindings.PositionName.inputValue}"
+                                        label="#{bindings.PositionName.label}"
+                                        model="#{bindings.PositionName.listOfValuesModel}"
+                                        columns="65" contentStyle="height:16px;"
+                                        autoSubmit="true"
+                                        partialTriggers="jobNameId organizationNameId"
+                                        valueChangeListener="#{pageFlowScope.AssignmentCreateBean.positionChangeListener}"
+                                        binding="#{pageFlowScope.AssignmentCreateBean.positionBind}">
+                    <f:validator binding="#{bindings.PositionName.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.PositionName.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputListOfValues id="gradeNameId"
+                                        popupTitle="Search and Select: #{bindings.GradeName.hints.label}"
+                                        value="#{bindings.GradeName.inputValue}"
+                                        label="#{bindings.GradeName.label}"
+                                        model="#{bindings.GradeName.listOfValuesModel}"
+                                        columns="65" autoSubmit="true"
+                                        contentStyle="height:16px;"
+                                        binding="#{pageFlowScope.AssignmentCreateBean.gradeNameLovBind}"
+                                        valueChangeListener="#{pageFlowScope.AssignmentCreateBean.gradeValidationForPositionChangeListener}"
+                                        returnPopupListener="#{pageFlowScope.AssignmentCreateBean.gradeLOVPopupReturnListener}">
+                    <f:validator binding="#{bindings.GradeName.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.GradeName.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputListOfValues id="locationCodeId"
+                                        popupTitle="Search and Select: #{bindings.LocationCode.hints.label}"
+                                        value="#{bindings.LocationCode.inputValue}"
+                                        label="#{bindings.LocationCode.label}"
+                                        model="#{bindings.LocationCode.listOfValuesModel}"
+                                        columns="65"
+                                        binding="#{pageFlowScope.AssignmentCreateBean.locationNameBind}"
+                                        contentStyle="height:16px;"
+                                        partialTriggers="d4">
+                    <f:validator binding="#{bindings.LocationCode.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.LocationCode.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <!--<af:selectOneChoice value="#{bindings.AssignmentCategory.inputValue}"
+                                      label="Assignment Category"
+                                      contentStyle="width:380.00px;height:18px;"
+                                      id="soc18">
+                    <f:selectItems value="#{bindings.AssignmentCategory.items}"
+                                   id="si34"/>
+                  </af:selectOneChoice>-->
+                  <!-- <af:selectOneChoice value="#{bindings.AsgCategoryMeaning.inputValue}"
+                                      label="Assignment Category"
+                                     contentStyle="width:400.00px;height:18px;" autoSubmit="true"
+                                      shortDesc="#{bindings.AsgCategoryMeaning.hints.tooltip}"
+                                      id="soc4"
+                                      binding="#{pageFlowScope.AssignmentCreateBean.assgnCategoryLovBind}"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.assignmentCategoryValueChangeListener}">
+                    <f:selectItems value="#{bindings.AsgCategoryMeaning.items}"
+                                   id="si5"/>
+                  </af:selectOneChoice>-->
+                  <!--EmploymentCategory is Assignment Category here -->
+                  <af:selectOneChoice value="#{bindings.EmploymentCategory.inputValue}"
+                                      label="#{bindings.EmploymentCategory.label}"
+                                      contentStyle="width:350px;height:18px;"
+                                      autoSubmit="true" id="soc4"
+                                      binding="#{pageFlowScope.AssignmentCreateBean.assgnCategoryLovBind}"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.assignmentCategoryValueChangeListener}">
+                    <f:selectItems value="#{bindings.EmploymentCategory.items}"
+                                   id="si5"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.NhsJobApplRef.inputValue}"
+                                label="#{bindings.NhsJobApplRef.label}"
+                                columns="65" id="it16" disabled="true"/>
+                  <!--  <af:selectOneChoice value="#{bindings.ChangeReasonLOVVO1.inputValue}"
+                                      label="Change Reason"
+                                      contentStyle="width:400.00px;height:18px;" autoSubmit="true"
+                                      id="soc2" valueChangeListener="#{pageFlowScope.AssignmentCreateBean.changeReasonValidationChangeListener}">
+                    <f:selectItems value="#{bindings.ChangeReasonLOVVO1.items}"
+                                   id="si2"/>
+                  </af:selectOneChoice>-->
+                  <af:selectOneChoice value="#{bindings.ChangeReason.inputValue}"
+                                      label="#{bindings.ChangeReason.label}"
+                                      contentStyle="width:350px;height:18px;"
+                                      autoSubmit="true" id="soc2"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.changeReasonValidationChangeListener}">
+                    <f:selectItems value="#{bindings.ChangeReason.items}"
+                                   id="si2"/>
+                  </af:selectOneChoice>
+                  <af:panelLabelAndMessage label="Group" id="plam2">
+                    <af:panelGroupLayout id="pgl11" layout="horizontal">
+                      <!--<af:inputText value="#{pageFlowScope.AssignmentCreateBean.groupDFFInptTxtVlaue}"-->
+                      <af:inputText value="#{bindings.GroupName.inputValue}"
+                                    id="it1" disabled="true" simple="true"
+                                    contentStyle="width:340px;height:16px;border-color:rgb(231,231,231); border-style:solid; border-width:1.0px;"
+                                    binding="#{pageFlowScope.AssignmentCreateBean.groupKFFInptTxtBind}"/>
+                      <af:spacer height="5" width="5" id="s15"/>
+                      <af:commandImageLink id="cl1" icon="/images/edit.jpg"
+                                           immediate="true">
+                        <af:showPopupBehavior popupId="p1"/>
+                      </af:commandImageLink>
+                    </af:panelGroupLayout>
+                  </af:panelLabelAndMessage>
+                  <af:inputListOfValues id="jobNameId"
+                                        popupTitle="Search and Select: #{bindings.JobName.hints.label}"
+                                        value="#{bindings.JobName.inputValue}"
+                                        label="Job"
+                                        model="#{bindings.JobName.listOfValuesModel}"
+                                        columns="65" contentStyle="height:16px;"
+                                        valueChangeListener="#{pageFlowScope.AssignmentCreateBean.jobChangeListener}"
+                                        autoSubmit="true"
+                                        partialTriggers="positionNameId"
+                                        binding="#{pageFlowScope.AssignmentCreateBean.jobNameBind}">
+                    <f:validator binding="#{bindings.JobName.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.JobName.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:selectOneChoice value="#{bindings.PayrollName.inputValue}"
+                                      label="#{bindings.PayrollName.label}"
+                                      contentStyle="width:350px;height:18px;"
+                                      id="soc1"
+                                      binding="#{pageFlowScope.AssignmentCreateBean.payrollLovforPositionBind}"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.payrollValueChangeListener}">
+                    <f:selectItems value="#{bindings.PayrollName.items}"
+                                   id="si1"/>
+                  </af:selectOneChoice>
+                  <!--  <af:selectOneChoice value="#{bindings.AssignmentStatusTypeId.inputValue}"
+                                      label="Status"
+                                      contentStyle="width:380.00px;height:18px;"
+                                      required="true" id="soc3">
+                    <f:selectItems value="#{bindings.AssignmentStatusTypeId.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>-->
+                  <!-- <af:selectOneChoice value="#{bindings.UserStatus.inputValue}"
+                              label="#{bindings.UserStatus.label}"
+                              required="true" showRequired="true"
+                              shortDesc="#{bindings.UserStatus.hints.tooltip}"
+                              id="soc5" valueChangeListener="#{pageFlowScope.AssignmentCreateBean.assignmentStatusChangeListener}"
+                                  binding="#{pageFlowScope.AssignmentCreateBean.assignmentStatusLOVBind}">
+                 <f:selectItems value="#{bindings.UserStatus.items}" id="si4"/>
+                 </af:selectOneChoice>-->
+                  <af:selectOneChoice value="#{bindings.UserStatus.inputValue}"
+                                      label="#{bindings.UserStatus.label}"
+                                      autoSubmit="true" showRequired="true"
+                                      required="true"
+                                      contentStyle="width:350px;height:18px;"
+                                      id="soc5"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.assignmentStatusChangeListener}"
+                                      binding="#{pageFlowScope.AssignmentCreateBean.assignmentStatusLOVBind}">
+                    <f:selectItems value="#{bindings.UserStatus.items}"
+                                   id="si4"/>
+                  </af:selectOneChoice>
+                  <!-- <af:selectOneChoice value="#{bindings.EmployeeCategory.inputValue}"
+                                      label="Employee Category"
+                                      contentStyle="width:380.00px;height:18px;"
+                                      id="soc18">
+                    <f:selectItems value="#{bindings.EmployeeCategory.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>-->
+                  <af:selectOneChoice value="#{bindings.EmpCategoryMeaning.inputValue}"
+                                      label="#{bindings.EmpCategoryMeaning.label}"
+                                      autoSubmit="true"
+                                      contentStyle="width:350px;height:18px;"
+                                      id="soc18">
+                    <f:selectItems value="#{bindings.EmpCategoryMeaning.items}"
+                                   id="si3"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.VacancyId.inputValue}"
+                                label="#{bindings.VacancyId.label}"
+                                disabled="true" columns="65" id="it17">
+                    <f:validator binding="#{bindings.VacancyId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.VacancyId.format}"/>
+                  </af:inputText>
+                  <af:selectBooleanCheckbox value="#{bindings.PrimaryFlag.inputValue}"
+                                            disabled="#{pageFlowScope.AssignmentCreateBean.primaryFlagIsDisable}"
+                                            autoSubmit="true"
+                                            label="#{bindings.PrimaryFlag.label}"
+                                            id="sbc1"
+                                            binding="#{pageFlowScope.AssignmentCreateBean.primaryFlagBind}"/>
+                  <f:facet name="footer"/>
+                </af:panelFormLayout>
+                <af:panelGroupLayout id="pgl12" halign="right"
+                                     layout="horizontal">
+                  <af:commandButton text="Save" id="cb7"
+                                    binding="#{pageFlowScope.AssignmentCreateBean.createAssgnSaveButtonBind}"
+                                    action="#{pageFlowScope.AssignmentCreateBean.saveBasicAssignmentDetails}">
+                </af:commandButton>
+                  <af:spacer id="s22" height="10" width="10"/>
+                  <!-- <af:commandButton text="Update" id="cb4" rendered="false"
+                                  binding="#{pageFlowScope.AssignmentCreateBean.updateButtonBind}"></af:commandButton>
+                <af:spacer id="s71" height="10" width="10"/>
+                <af:commandButton id="cb1" text="Back"
+                                  action="#{pageFlowScope.AssignmentCreateBean.backToAssignmentSearchPage}"
+                                  immediate="true"/>
+                <af:spacer id="s23" height="10" width="10"/>-->
+                </af:panelGroupLayout>
+              </af:panelHeader>
+            </af:showDetailItem>
+            <!-- End :: Create Assignment :: Basic Assignment Details    -->
+            <!--  Start :: Create Assignment :: Standard Conditions   -->
+            <af:showDetailItem text="Standard Conditions" id="sdi4"
+                               disabled="false" immediate="true">
+              <af:panelHeader text=" " id="ph7" styleClass="borderedHeader">
+                <af:panelFormLayout id="pfl2" rows="5" maxColumns="2">
+                  <af:inputText value="#{bindings.WorkingHours.inputValue}"
+                                label="#{bindings.WorkingHours.hints.label}"
+                                required="#{bindings.WorkingHours.hints.mandatory}"
+                                columns="#{bindings.WorkingHours.hints.displayWidth}"
+                                maximumLength="10"
+                                shortDesc="#{bindings.WorkingHours.hints.tooltip}"
+                                id="it2" autoSubmit="true"
+                                binding="#{pageFlowScope.AssignmentCreateBean.workingHoursBind}"
+                                partialTriggers="soc4 positionNameId">
+                    <f:validator binding="#{bindings.WorkingHours.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.WorkingHours.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.Frequency.inputValue}"
+                                      label="#{bindings.Frequency.label}"
+                                      required="#{bindings.Frequency.hints.mandatory}"
+                                      shortDesc="#{bindings.Frequency.hints.tooltip}"
+                                      id="soc3" contentStyle="width:300px"
+                                      partialTriggers="positionNameId">
+                    <f:selectItems value="#{bindings.Frequency.items}"
+                                   id="si27"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.HourlySalariedCode.inputValue}"
+                                      label="#{bindings.HourlySalariedCode.label}"
+                                      required="#{bindings.HourlySalariedCode.hints.mandatory}"
+                                      shortDesc="#{bindings.HourlySalariedCode.hints.tooltip}"
+                                      id="soc6" contentStyle="width:300px">
+                    <f:selectItems value="#{bindings.HourlySalariedCode.items}"
+                                   id="si6"/>
+                  </af:selectOneChoice>
+                  <af:panelLabelAndMessage label="Normal Time" id="plam1">
+                    <af:panelGroupLayout id="pgl0" layout="horizontal">
+                      <af:inputText value="#{bindings.TimeNormalStart.inputValue}"
+                                    label="#{bindings.TimeNormalStart.hints.label}"
+                                    required="#{bindings.TimeNormalStart.hints.mandatory}"
+                                    columns="#{bindings.TimeNormalStart.hints.displayWidth}"
+                                    maximumLength="#{bindings.TimeNormalStart.hints.precision}"
+                                    shortDesc="#{bindings.TimeNormalStart.hints.tooltip}"
+                                    id="it3" simple="true"
+                                    partialTriggers="positionNameId">
+                        <f:validator binding="#{bindings.TimeNormalStart.validator}"/>
+                        <af:convertDateTime pattern="HH:mm" type="time"/>
+                      </af:inputText>
+                      <af:outputText value="-" id="ot1"/>
+                      <af:inputText value="#{bindings.TimeNormalFinish.inputValue}"
+                                    simple="true"
+                                    required="#{bindings.TimeNormalFinish.hints.mandatory}"
+                                    columns="#{bindings.TimeNormalFinish.hints.displayWidth}"
+                                    maximumLength="#{bindings.TimeNormalFinish.hints.precision}"
+                                    shortDesc="#{bindings.TimeNormalFinish.hints.tooltip}"
+                                    id="it4" partialTriggers="positionNameId">
+                        <f:validator binding="#{bindings.TimeNormalFinish.validator}"/>
+                        <af:convertDateTime pattern="HH:mm" type="time"/>
+                      </af:inputText>
+                    </af:panelGroupLayout>
+                  </af:panelLabelAndMessage>
+                  <af:selectBooleanCheckbox value="#{bindings.WorkAtHome.inputValue}"
+                                            label="#{bindings.WorkAtHome.label}"
+                                            shortDesc="#{bindings.WorkAtHome.hints.tooltip}"
+                                            id="sbc2"/>
+                  <af:inputText value="#{bindings.NoticePeriodLength.inputValue}"
+                                label="#{bindings.NoticePeriodLength.hints.label}"
+                                required="#{bindings.NoticePeriodLength.hints.mandatory}"
+                                columns="#{bindings.NoticePeriodLength.hints.displayWidth}"
+                                maximumLength="#{bindings.NoticePeriodLength.hints.precision}"
+                                id="it5" autoSubmit="true">
+                    <f:validator binding="#{bindings.NoticePeriodLength.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.NoticePeriodLength.format}"/>
+                    <af:validateLongRange minimum="0" maximum="99999999"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.NoticePeriodUnits.inputValue}"
+                                      label="#{bindings.NoticePeriodUnits.label}"
+                                      required="#{bindings.NoticePeriodUnits.hints.mandatory}"
+                                      shortDesc="#{bindings.NoticePeriodUnits.hints.tooltip}"
+                                      id="soc7" contentStyle="width:300px"
+                                      disabled="#{!(bindings.NoticePeriodLength.inputValue ne null)}"
+                                      partialTriggers="it5">
+                    <f:selectItems value="#{bindings.NoticePeriodUnits.items}"
+                                   id="si7"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.ProbationPeriod.inputValue}"
+                                label="#{bindings.ProbationPeriod.hints.label}"
+                                required="#{bindings.ProbationPeriod.hints.mandatory}"
+                                columns="#{bindings.ProbationPeriod.hints.displayWidth}"
+                                maximumLength="#{bindings.ProbationPeriod.hints.precision}"
+                                shortDesc="#{bindings.ProbationPeriod.hints.tooltip}"
+                                id="it29" autoSubmit="true"
+                                partialTriggers="positionNameId">
+                    <f:validator binding="#{bindings.ProbationPeriod.validator}"/>
+                    <af:validateLongRange minimum="0" maximum="99999999"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.ProbationUnit.inputValue}"
+                                      label="#{bindings.ProbationUnit.label}"
+                                      required="#{bindings.ProbationUnit.hints.mandatory}"
+                                      shortDesc="#{bindings.ProbationUnit.hints.tooltip}"
+                                      id="soc12" contentStyle="width:300px"
+                                      disabled="#{!(bindings.ProbationPeriod.inputValue ne null)}"
+                                      partialTriggers="it29 positionNameId"
+                                      valueChangeListener="#{pageFlowScope.AssignmentCreateBean.probationPeriodUnitsValueChangeListener}"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.ProbationUnit.items}"
+                                   id="si20"/>
+                  </af:selectOneChoice>
+                  <af:inputDate value="#{bindings.DateProbationEnd.inputValue}"
+                                label="#{bindings.DateProbationEnd.hints.label}"
+                                required="#{bindings.DateProbationEnd.hints.mandatory}"
+                                shortDesc="#{bindings.DateProbationEnd.hints.tooltip}"
+                                id="id7" partialTriggers="soc12"
+                                binding="#{pageFlowScope.AssignmentCreateBean.probationPeriodEndDateBind}">
+                    <f:validator binding="#{bindings.DateProbationEnd.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelGroupLayout layout="horizontal" id="pgl20"
+                                     halign="right">
+                  <af:commandButton text="Save" id="cb6"
+                                    disabled="#{pageFlowScope.AssignmentCreateBean.standardConditionSaveButtonIsDisable}"
+                                    action="#{pageFlowScope.AssignmentCreateBean.assignmentRecordSave}"/>
+                </af:panelGroupLayout>
+              </af:panelHeader>
+            </af:showDetailItem>
+            <!--  End :: Create Assignment :: Standard Conditions   -->
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:showDetailItem>
+    </af:panelAccordion>
+    <af:panelAccordion id="pa2" styleClass="AFStretchWidth"
+                       dimensionsFrom="auto" discloseMany="false"
+                       discloseNone="true">
+      <!--  Start :: Create Assignment :: Other Assignment Details   -->
+      <af:showDetailItem text="Other Assignment Details" id="sdi5"
+                         disabled="#{pageFlowScope.AssignmentCreateBean.showDetailItemIsDisable}">
+        <af:panelHeader text="Other Assignment Details" id="ph5"
+                        styleClass="borderedHeader">
+          <af:panelFormLayout id="pfl3" rows="13" maxColumns="2" fieldWidth="55"
+                              styleClass="AFStretchWidth">
+            <af:inputDate value="#{bindings.FixedTermEndDate.inputValue}"
+                          label="#{bindings.FixedTermEndDate.hints.label}"
+                          required="#{bindings.FixedTermEndDate.hints.mandatory}"
+                          columns="#{bindings.FixedTermEndDate.hints.displayWidth}"
+                          shortDesc="#{bindings.FixedTermEndDate.hints.tooltip}"
+                          id="it6">
+              <f:validator binding="#{bindings.FixedTermEndDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:selectOneChoice value="#{bindings.FixedTermReason.inputValue}"
+                                label="#{bindings.FixedTermReason.label}"
+                                required="#{bindings.FixedTermReason.hints.mandatory}"
+                                shortDesc="#{bindings.FixedTermReason.hints.tooltip}"
+                                id="soc8" contentStyle="width:300px">
+              <f:selectItems value="#{bindings.FixedTermReason.items}"
+                             id="si8"/>
+            </af:selectOneChoice>
+            <af:selectOneRadio value="#{bindings.LocalEmpContract.inputValue}"
+                               label="#{bindings.LocalEmpContract.label}"
+                               required="#{bindings.LocalEmpContract.hints.mandatory}"
+                               shortDesc="#{bindings.LocalEmpContract.hints.tooltip}"
+                               id="sor1" layout="horizontal">
+              <f:selectItems value="#{bindings.LocalEmpContract.items}"
+                             id="si9"/>
+            </af:selectOneRadio>
+            <af:selectOneRadio value="#{bindings.NewDeal.inputValue}"
+                               label="#{bindings.NewDeal.label}"
+                               required="#{bindings.NewDeal.hints.mandatory}"
+                               shortDesc="#{bindings.NewDeal.hints.tooltip}"
+                               id="sor2" layout="horizontal">
+              <f:selectItems value="#{bindings.NewDeal.items}" id="si10"/>
+            </af:selectOneRadio>
+            <af:selectOneRadio value="#{bindings.JobSharer.inputValue}"
+                               label="#{bindings.JobSharer.label}"
+                               required="#{bindings.JobSharer.hints.mandatory}"
+                               shortDesc="#{bindings.JobSharer.hints.tooltip}"
+                               id="sor3" layout="horizontal">
+              <f:selectItems value="#{bindings.JobSharer.items}" id="si11"/>
+            </af:selectOneRadio>
+            <af:selectOneRadio value="#{bindings.NightWorker.inputValue}"
+                               label="#{bindings.NightWorker.label}"
+                               required="#{bindings.NightWorker.hints.mandatory}"
+                               shortDesc="#{bindings.NightWorker.hints.tooltip}"
+                               id="sor4" layout="horizontal">
+              <f:selectItems value="#{bindings.NightWorker.items}" id="si12"/>
+            </af:selectOneRadio>
+            <af:selectOneChoice value="#{bindings.FlexibleWorkingPattern.inputValue}"
+                                label="#{bindings.FlexibleWorkingPattern.label}"
+                                required="#{bindings.FlexibleWorkingPattern.hints.mandatory}"
+                                shortDesc="#{bindings.FlexibleWorkingPattern.hints.tooltip}"
+                                id="soc9" contentStyle="width:300px">
+              <f:selectItems value="#{bindings.FlexibleWorkingPattern.items}"
+                             id="si13"/>
+            </af:selectOneChoice>
+            <af:inputText value="#{bindings.AvgWorkingDaysPerweek.inputValue}"
+                          label="#{bindings.AvgWorkingDaysPerweek.hints.label}"
+                          required="#{bindings.AvgWorkingDaysPerweek.hints.mandatory}"
+                          columns="#{bindings.AvgWorkingDaysPerweek.hints.displayWidth}"
+                          maximumLength="5"
+                          shortDesc="#{bindings.AvgWorkingDaysPerweek.hints.tooltip}"
+                          id="it7">
+              <f:validator binding="#{bindings.AvgWorkingDaysPerweek.validator}"/>
+              <af:validateDoubleRange minimum="0.0" maximum="99.99"/>
+            </af:inputText>
+            <af:selectOneRadio value="#{bindings.MaximumParttime.inputValue}"
+                               label="#{bindings.MaximumParttime.label}"
+                               required="#{bindings.MaximumParttime.hints.mandatory}"
+                               shortDesc="#{bindings.MaximumParttime.hints.tooltip}"
+                               id="sor5" layout="horizontal">
+              <f:selectItems value="#{bindings.MaximumParttime.items}"
+                             id="si14"/>
+            </af:selectOneRadio>
+            <af:inputDate value="#{bindings.FoundationGatewayDate.inputValue}"
+                          label="#{bindings.FoundationGatewayDate.hints.label}"
+                          required="#{bindings.FoundationGatewayDate.hints.mandatory}"
+                          columns="#{bindings.FoundationGatewayDate.hints.displayWidth}"
+                          shortDesc="#{bindings.FoundationGatewayDate.hints.tooltip}"
+                          id="it8">
+              <f:validator binding="#{bindings.FoundationGatewayDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputDate value="#{bindings.AbsAccrualStartDate.inputValue}"
+                          label="#{bindings.AbsAccrualStartDate.hints.label}"
+                          required="#{bindings.AbsAccrualStartDate.hints.mandatory}"
+                          columns="#{bindings.AbsAccrualStartDate.hints.displayWidth}"
+                          shortDesc="#{bindings.AbsAccrualStartDate.hints.tooltip}"
+                          id="it9">
+              <f:validator binding="#{bindings.AbsAccrualStartDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputDate value="#{bindings.StartDateGrade.inputValue}"
+                          label="#{bindings.StartDateGrade.hints.label}"
+                          required="#{bindings.StartDateGrade.hints.mandatory}"
+                          columns="#{bindings.StartDateGrade.hints.displayWidth}"
+                          shortDesc="#{bindings.StartDateGrade.hints.tooltip}"
+                          id="it10">
+              <f:validator binding="#{bindings.StartDateGrade.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputDate value="#{bindings.BankProposIncDate.inputValue}"
+                          label="#{bindings.BankProposIncDate.hints.label}"
+                          required="#{bindings.BankProposIncDate.hints.mandatory}"
+                          columns="#{bindings.BankProposIncDate.hints.displayWidth}"
+                          shortDesc="#{bindings.BankProposIncDate.hints.tooltip}"
+                          id="it11">
+              <f:validator binding="#{bindings.BankProposIncDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <!-- second column of other assignment starts here -->
+            <af:selectOneChoice id="soc10" contentStyle="width:300px"
+                                label="Department Manager Override">
+              <f:selectItems value="Select" id="si15"/>
+            </af:selectOneChoice>
+            <!-- <af:selectOneChoice value="#{bindings.DeptMgrOverride.inputValue}"
+                                label="#{bindings.DeptMgrOverride.label}"
+                                required="#{bindings.DeptMgrOverride.hints.mandatory}"
+                                shortDesc="#{bindings.DeptMgrOverride.hints.tooltip}"
+                                id="soc10" contentStyle="width:300px">
+              <f:selectItems value="#{bindings.DeptMgrOverride.items}"
+                             id="si15"/>
+            </af:selectOneChoice> -->
+            <af:inputListOfValues id="deptMgrOverrideNameId"
+                                  popupTitle="Search and Select: #{bindings.DeptMgrOverrideName.hints.label}"
+                                  value="#{bindings.DeptMgrOverrideName.inputValue}"
+                                  label="#{bindings.DeptMgrOverrideName.hints.label}"
+                                  model="#{bindings.DeptMgrOverrideName.listOfValuesModel}"
+                                  required="#{bindings.DeptMgrOverrideName.hints.mandatory}"
+                                  columns="#{bindings.DeptMgrOverrideName.hints.displayWidth}"
+                                  shortDesc="#{bindings.DeptMgrOverrideName.hints.tooltip}">
+              <f:validator binding="#{bindings.DeptMgrOverrideName.validator}"/>
+            </af:inputListOfValues>
+            <af:selectOneRadio value="#{bindings.MonitorChanges.inputValue}"
+                               label="#{bindings.MonitorChanges.label}"
+                               required="#{bindings.MonitorChanges.hints.mandatory}"
+                               shortDesc="#{bindings.MonitorChanges.hints.tooltip}"
+                               id="sor6" layout="horizontal">
+              <f:selectItems value="#{bindings.MonitorChanges.items}"
+                             id="si16"/>
+            </af:selectOneRadio>
+            <af:inputText value="#{bindings.OverrideStdGradeHours.inputValue}"
+                          label="#{bindings.OverrideStdGradeHours.hints.label}"
+                          required="#{bindings.OverrideStdGradeHours.hints.mandatory}"
+                          columns="#{bindings.OverrideStdGradeHours.hints.displayWidth}"
+                          maximumLength="5"
+                          shortDesc="#{bindings.OverrideStdGradeHours.hints.tooltip}"
+                          id="it12">
+              <f:validator binding="#{bindings.OverrideStdGradeHours.validator}"/>
+              <af:validateDoubleRange minimum="0.01" maximum="99.99"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.OverrideStdGradeOtRate.inputValue}"
+                          label="#{bindings.OverrideStdGradeOtRate.hints.label}"
+                          required="#{bindings.OverrideStdGradeOtRate.hints.mandatory}"
+                          columns="#{bindings.OverrideStdGradeOtRate.hints.displayWidth}"
+                          maximumLength="9"
+                          shortDesc="#{bindings.OverrideStdGradeOtRate.hints.tooltip}"
+                          id="it13">
+              <f:validator binding="#{bindings.OverrideStdGradeOtRate.validator}"/>
+              <af:validateDoubleRange minimum="0.0" maximum="999999.99"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.OverrideStdGradeOtHours.inputValue}"
+                          label="#{bindings.OverrideStdGradeOtHours.hints.label}"
+                          required="#{bindings.OverrideStdGradeOtHours.hints.mandatory}"
+                          columns="#{bindings.OverrideStdGradeOtHours.hints.displayWidth}"
+                          maximumLength="5"
+                          shortDesc="#{bindings.OverrideStdGradeOtHours.hints.tooltip}"
+                          id="it14">
+              <f:validator binding="#{bindings.OverrideStdGradeOtHours.validator}"/>
+              <af:validateDoubleRange minimum="0.00" maximum="99.99"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.UpliftedRateChDt.inputValue}"
+                          label="#{bindings.UpliftedRateChDt.hints.label}"
+                          required="#{bindings.UpliftedRateChDt.hints.mandatory}"
+                          columns="#{bindings.UpliftedRateChDt.hints.displayWidth}"
+                          shortDesc="#{bindings.UpliftedRateChDt.hints.tooltip}"
+                          id="it15">
+              <f:validator binding="#{bindings.UpliftedRateChDt.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:selectOneRadio value="#{bindings.ExitQuestionerReq.inputValue}"
+                               label="#{bindings.ExitQuestionerReq.label}"
+                               required="#{bindings.ExitQuestionerReq.hints.mandatory}"
+                               shortDesc="#{bindings.ExitQuestionerReq.hints.tooltip}"
+                               id="sor7" layout="horizontal">
+              <f:selectItems value="#{bindings.ExitQuestionerReq.items}"
+                             id="si17"/>
+            </af:selectOneRadio>
+            <af:selectOneRadio value="#{bindings.PayslipToHome.inputValue}"
+                               label="#{bindings.PayslipToHome.label}"
+                               required="#{bindings.PayslipToHome.hints.mandatory}"
+                               shortDesc="#{bindings.PayslipToHome.hints.tooltip}"
+                               id="sor8" layout="horizontal">
+              <f:selectItems value="#{bindings.PayslipToHome.items}" id="si18"/>
+            </af:selectOneRadio>
+            <af:selectOneChoice value="#{bindings.AccomidationStatus.inputValue}"
+                                label="#{bindings.AccomidationStatus.label}"
+                                required="#{bindings.AccomidationStatus.hints.mandatory}"
+                                shortDesc="#{bindings.AccomidationStatus.hints.tooltip}"
+                                id="soc11" contentStyle="width:300px">
+              <f:selectItems value="#{bindings.AccomidationStatus.items}"
+                             id="si19"/>
+            </af:selectOneChoice>
+            <af:inputText value="#{bindings.Funding1.inputValue}"
+                          label="#{bindings.Funding1.hints.label}"
+                          required="#{bindings.Funding1.hints.mandatory}"
+                          columns="#{bindings.Funding1.hints.displayWidth}"
+                          maximumLength="#{bindings.Funding1.hints.precision}"
+                          shortDesc="#{bindings.Funding1.hints.tooltip}"
+                          id="it18">
+              <f:validator binding="#{bindings.Funding1.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.Funding1Percent.inputValue}"
+                          label="#{bindings.Funding1Percent.hints.label}"
+                          required="#{bindings.Funding1Percent.hints.mandatory}"
+                          columns="#{bindings.Funding1Percent.hints.displayWidth}"
+                          maximumLength="6"
+                          shortDesc="#{bindings.Funding1Percent.hints.tooltip}"
+                          id="it19">
+              <f:validator binding="#{bindings.Funding1Percent.validator}"/>
+              <af:validateDoubleRange minimum="0.00" maximum="999.99"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.Funding2.inputValue}"
+                          label="#{bindings.Funding2.hints.label}"
+                          required="#{bindings.Funding2.hints.mandatory}"
+                          columns="#{bindings.Funding2.hints.displayWidth}"
+                          maximumLength="#{bindings.Funding2.hints.precision}"
+                          shortDesc="#{bindings.Funding2.hints.tooltip}"
+                          id="it20">
+              <f:validator binding="#{bindings.Funding2.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.Funding2Percent.inputValue}"
+                          label="#{bindings.Funding2Percent.hints.label}"
+                          required="#{bindings.Funding2Percent.hints.mandatory}"
+                          columns="#{bindings.Funding2Percent.hints.displayWidth}"
+                          maximumLength="6"
+                          shortDesc="#{bindings.Funding2Percent.hints.tooltip}"
+                          id="it21">
+              <f:validator binding="#{bindings.Funding2Percent.validator}"/>
+              <af:validateDoubleRange minimum="0.00" maximum="999.99"/>
+            </af:inputText>
+          </af:panelFormLayout>
+          <af:panelGroupLayout layout="horizontal" id="pgl19" halign="right">
+            <af:commandButton text="Save" id="cb5"
+                              action="#{pageFlowScope.AssignmentCreateBean.assignmentRecordSave}"/>
+          </af:panelGroupLayout>
+        </af:panelHeader>
+      </af:showDetailItem>
+      <!--  End :: Create Assignment :: Other Assignment Details   -->
+      <!--  Start :: Create Assignment :: Supervisor   -->
+      <af:showDetailItem text="Supervisor" id="sdi6"
+                         disabled="#{pageFlowScope.AssignmentCreateBean.showDetailItemIsDisable}">
+        <af:panelGroupLayout id="pgl5" layout="horizontal"
+                             styleClass="AFStretchWidth">
+          <af:panelHeader text="Primary Supervisor" id="ph0"
+                          styleClass="borderedHeader">
+            <af:panelFormLayout id="pgl22" styleClass="AFStretchWidth">
+              <af:inputListOfValues id="supervisorName1Id"
+                                    popupTitle="Search and Select: #{bindings.SupervisorName1.hints.label}"
+                                    value="#{bindings.SupervisorName1.inputValue}"
+                                    label="#{bindings.SupervisorName1.label}"
+                                    model="#{bindings.SupervisorName1.listOfValuesModel}"
+                                    required="#{bindings.SupervisorName1.hints.mandatory}"
+                                    columns="65" contentStyle="height:16px;"
+                                    shortDesc="#{bindings.SupervisorName1.hints.tooltip}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.AssignmentCreateBean.supervisorValueChangeListener}"
+                                    partialTriggers="supervisorAssignmentNumberId supervisorEmployeeNumberId"
+                                    binding="#{pageFlowScope.AssignmentCreateBean.supervisorNameBind}">
+                <f:validator binding="#{bindings.SupervisorName1.validator}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="supervisorEmployeeNumberId"
+                                    popupTitle="Search and Select: #{bindings.SupervisorEmployeeNumber.hints.label}"
+                                    value="#{bindings.SupervisorEmployeeNumber.inputValue}"
+                                    label="#{bindings.SupervisorEmployeeNumber.label}"
+                                    model="#{bindings.SupervisorEmployeeNumber.listOfValuesModel}"
+                                    required="#{bindings.SupervisorEmployeeNumber.hints.mandatory}"
+                                    columns="65" contentStyle="height:16px;"
+                                    shortDesc="#{bindings.SupervisorEmployeeNumber.hints.tooltip}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.AssignmentCreateBean.supervisorEmployeeNumberValueChangeListener}"
+                                    partialTriggers="supervisorAssignmentNumberId supervisorName1Id"
+                                    binding="#{pageFlowScope.AssignmentCreateBean.supervisorEmployeeNumberBind}">
+                <f:validator binding="#{bindings.SupervisorEmployeeNumber.validator}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="supervisorAssignmentNumberId"
+                                    popupTitle="Search and Select: #{bindings.SupervisorAssignmentNumber.hints.label}"
+                                    value="#{bindings.SupervisorAssignmentNumber.inputValue}"
+                                    label="#{bindings.SupervisorAssignmentNumber.label}"
+                                    model="#{bindings.SupervisorAssignmentNumber.listOfValuesModel}"
+                                    required="#{bindings.SupervisorAssignmentNumber.hints.mandatory}"
+                                    columns="65" contentStyle="height:16px;"
+                                    shortDesc="#{bindings.SupervisorAssignmentNumber.hints.tooltip}"
+                                    autoSubmit="true">
+                <f:validator binding="#{bindings.SupervisorAssignmentNumber.validator}"/>
+              </af:inputListOfValues>
+              <af:selectBooleanCheckbox value="#{bindings.ManagerFlag.inputValue}"
+                                        label="#{bindings.ManagerFlag.label}"
+                                        shortDesc="#{bindings.ManagerFlag.hints.tooltip}"
+                                        id="sbc3" disabled="true"/>
+              <!--<af:selectBooleanCheckbox value="#{bindings.SupervisorManagerFlag.inputValue}"
+                                        label="#{bindings.SupervisorManagerFlag.label}"
+                                        shortDesc="#{bindings.SupervisorManagerFlag.hints.tooltip}"
+                                        id="sbc5"/> -->
+              <af:spacer width="10" height="10" id="s37"/>
+            </af:panelFormLayout>
+            <af:panelGroupLayout id="pgl8" layout="horizontal" halign="right">
+              <af:commandButton text="Save" id="cb3"
+                                action="#{pageFlowScope.AssignmentCreateBean.assignmentRecordSave}"/>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <!-- Additional Supervisors :: as of now , not required -->
+          <!--   <af:panelHeader text="Additional Supervisors" id="ph6"
+                          styleClass="borderedHeader">
+            <af:table value="#{bindings.AdditionalSupervisorsVO1.collectionModel}"
+                      var="row"
+                      rows="#{bindings.AdditionalSupervisorsVO1.rangeSize}"
+                      emptyText="#{bindings.AdditionalSupervisorsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.AdditionalSupervisorsVO1.rangeSize}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.AdditionalSupervisorsVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.AdditionalSupervisorsVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1">
+              <af:column sortProperty="#{bindings.AdditionalSupervisorsVO1.hints.FromDate.name}"
+                         sortable="false"
+                         headerText="#{bindings.AdditionalSupervisorsVO1.hints.FromDate.label}"
+                         id="c2"
+                         binding="#{pageFlowScope.AssignmentSearchBean.fromDateColumn}">
+                <af:outputText value="#{row.FromDate}" id="ot3"/>
+                <af:decorativeBox id="db1">
+                  <f:facet name="center"/>
+                  <f:facet name="top"/>
+                </af:decorativeBox>
+              </af:column>
+              <af:column sortProperty="#{bindings.AdditionalSupervisorsVO1.hints.ToDate.name}"
+                         sortable="false"
+                         headerText="#{bindings.AdditionalSupervisorsVO1.hints.ToDate.label}"
+                         id="c3">
+                <af:outputText value="#{row.ToDate}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.AdditionalSupervisorsVO1.hints.FullName.name}"
+                         sortable="false"
+                         headerText="#{bindings.AdditionalSupervisorsVO1.hints.FullName.label}"
+                         id="c1">
+                <af:outputText value="#{row.FullName}" id="ot4"/>
+              </af:column>
+            </af:table>
+            <af:spacer width="10" height="10" id="s27"/>
+            <af:commandButton text="Add Supervisor" id="addSupervisor"
+                              disabled="#{!bindings.CreateInsert.enabled}"
+                              actionListener="#{bindings.CreateInsert.execute}">
+              <af:showPopupBehavior popupId="p2"/>
+            </af:commandButton>
+            <af:popup id="p2"
+                      popupFetchListener="#{pageFlowScope.AssignmentSearchBean.editAdditionalSupervisorPopupFetchListener}">
+              <af:dialog id="d1">
+                <af:panelFormLayout id="pfl4">
+                  <f:facet name="footer"/>
+                  <af:panelFormLayout id="pfl5">
+                      <af:inputDate value="#{bindings.FromDate1.inputValue}"
+                                    label="#{bindings.FromDate1.hints.label}"
+                                    required="#{bindings.FromDate1.hints.mandatory}"
+                                    columns="#{bindings.FromDate1.hints.displayWidth}"
+                                    shortDesc="#{bindings.FromDate1.hints.tooltip}"
+                                    id="it28">
+                        <f:validator binding="#{bindings.FromDate1.validator}"/>
+                      </af:inputDate>
+                      <af:inputDate value="#{bindings.ToDate1.inputValue}"
+                                    label="#{bindings.ToDate1.hints.label}"
+                                    required="#{bindings.ToDate1.hints.mandatory}"
+                                    columns="#{bindings.ToDate1.hints.displayWidth}"
+                                   
+                                    shortDesc="#{bindings.ToDate1.hints.tooltip}"
+                                    id="it30">
+                        <f:validator binding="#{bindings.ToDate1.validator}"/>
+                      </af:inputDate>
+                    <af:inputListOfValues id="personIdId"
+                                          popupTitle="Search and Select: #{bindings.PersonId.hints.label}"
+                                          value="#{bindings.PersonId.inputValue}"
+                                          label="#{bindings.PersonId.hints.label}"
+                                          model="#{bindings.PersonId.listOfValuesModel}"
+                                          required="#{bindings.PersonId.hints.mandatory}"
+                                          columns="#{bindings.PersonId.hints.displayWidth}"
+                                          shortDesc="#{bindings.PersonId.hints.tooltip}">
+                      <f:validator binding="#{bindings.PersonId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.PersonId.format}"/>
+                    </af:inputListOfValues>
+                    <f:facet name="footer">
+                      <af:commandButton text="Submit" id="cb9"/>
+                    </f:facet>
+                  </af:panelFormLayout>
+                </af:panelFormLayout>
+              </af:dialog>
+            </af:popup>
+          </af:panelHeader>-->
+        </af:panelGroupLayout>
+      </af:showDetailItem>
+      <!--  End :: Create Assignment :: Supervisor   -->
+      <!--  Start :: Create Assignment :: Salary Information and Special Celling   -->
+      <af:showDetailItem text="Salary Information and Special Celling" id="sdi2"
+                         inlineStyle="height:240px;"
+                         disabled="#{pageFlowScope.AssignmentCreateBean.showDetailItemIsDisable}">
+        <af:panelGroupLayout id="pgl15" layout="vertical" styleClass=""
+                             inlineStyle="margin:1%">
+          <af:panelGroupLayout id="pgl4" layout="horizontal"
+                               styleClass="AFStretchWidth" valign="top"
+                               inlineStyle="margin:1%">
+            <af:panelHeader text="Salary Information" id="ph1"
+                            styleClass="borderedHeader">
+              <af:panelFormLayout id="pfl0">
+                <af:selectOneChoice value="#{bindings.PayBasisId.inputValue}"
+                                    label="#{bindings.PayBasisId.label}"
+                                    required="#{bindings.PayBasisId.hints.mandatory}"
+                                    shortDesc="#{bindings.PayBasisId.hints.tooltip}"
+                                    id="soc14" contentStyle="width:275px"
+                                    partialTriggers="positionNameId">
+                  <f:selectItems value="#{bindings.PayBasisId.items}"
+                                 id="si22"/>
+                </af:selectOneChoice>
+                <af:inputText value="#{bindings.FullTimeSalary.inputValue}"
+                              label="#{bindings.FullTimeSalary.hints.label}"
+                              required="#{bindings.FullTimeSalary.hints.mandatory}"
+                              columns="#{bindings.FullTimeSalary.hints.displayWidth}"
+                              maximumLength="#{bindings.FullTimeSalary.hints.precision}"
+                              shortDesc="#{bindings.FullTimeSalary.hints.tooltip}"
+                              id="it25" disabled="true">
+                  <f:validator binding="#{bindings.FullTimeSalary.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.PartTimeSalary.inputValue}"
+                              label="#{bindings.PartTimeSalary.hints.label}"
+                              required="#{bindings.PartTimeSalary.hints.mandatory}"
+                              columns="#{bindings.PartTimeSalary.hints.displayWidth}"
+                              maximumLength="#{bindings.PartTimeSalary.hints.precision}"
+                              shortDesc="#{bindings.PartTimeSalary.hints.tooltip}"
+                              id="it26" disabled="true">
+                  <f:validator binding="#{bindings.PartTimeSalary.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.HourlyRate.inputValue}"
+                              label="#{bindings.HourlyRate.hints.label}"
+                              required="#{bindings.HourlyRate.hints.mandatory}"
+                              columns="#{bindings.HourlyRate.hints.displayWidth}"
+                              maximumLength="#{bindings.HourlyRate.hints.precision}"
+                              shortDesc="#{bindings.HourlyRate.hints.tooltip}"
+                              id="it27" disabled="true">
+                  <f:validator binding="#{bindings.HourlyRate.validator}"/>
+                </af:inputText>
+                <af:inputDate value="#{bindings.IncrementaDate.inputValue}"
+                              label="#{bindings.IncrementaDate.hints.label}"
+                              required="#{bindings.IncrementaDate.hints.mandatory}"
+                              columns="#{bindings.IncrementaDate.hints.displayWidth}"
+                              shortDesc="#{bindings.IncrementaDate.hints.tooltip}"
+                              id="it23">
+                  <f:validator binding="#{bindings.IncrementaDate.validator}"/>
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+                <af:inputText value="#{bindings.NoOfIncrements.inputValue}"
+                              label="#{bindings.NoOfIncrements.hints.label}"
+                              required="#{bindings.NoOfIncrements.hints.mandatory}"
+                              columns="#{bindings.NoOfIncrements.hints.displayWidth}"
+                              maximumLength="#{bindings.NoOfIncrements.hints.precision}"
+                              shortDesc="#{bindings.NoOfIncrements.hints.tooltip}"
+                              id="it24">
+                  <f:validator binding="#{bindings.NoOfIncrements.validator}"/>
+                  <af:validateLongRange minimum="0" maximum="999"/>
+                </af:inputText>
+              </af:panelFormLayout>
+            </af:panelHeader>
+            <af:panelHeader text="Grade Step Placement" id="ph3"
+                            styleClass="borderedHeader">
+              <af:panelFormLayout id="pfl5">
+                <af:panelLabelAndMessage label="Point" id="plam3">
+                  <af:panelGroupLayout id="pgl9" layout="horizontal">
+                  <af:inputListOfValues id="pointId"
+                                    popupTitle="Search and Select: #{bindings.Point.hints.label}"
+                                    value="#{bindings.Point.inputValue}"
+                                    label="#{bindings.Point.hints.label}"
+                                    model="#{bindings.Point.listOfValuesModel}"
+                                    required="false"
+                                    columns="#{bindings.Point.hints.displayWidth}"
+                                    shortDesc="#{bindings.Point.hints.tooltip}"
+                                    simple="true"
+                                        autoSubmit="true">
+                <f:validator binding="#{bindings.Point.validator}"/>
+              </af:inputListOfValues>
+                <af:inputText value="#{bindings.Step.inputValue}"
+                              label="#{bindings.Step.hints.label}"
+                              required="false"
+                              columns="#{bindings.Step.hints.displayWidth}"
+                              maximumLength="#{bindings.Step.hints.precision}"
+                              shortDesc="#{bindings.Step.hints.tooltip}"
+                              id="it22" partialTriggers="pointId"
+                              disabled="true">
+                  <f:validator binding="#{bindings.Step.validator}"/>
+                </af:inputText>
+                </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+                <af:selectOneChoice value="#{bindings.ReasonCode.inputValue}"
+                                  label="#{bindings.ReasonCode.label}"
+                                  required="false"
+                                  shortDesc="#{bindings.ReasonCode.hints.tooltip}"
+                                  id="soc19" autoSubmit="true">
+                <f:selectItems value="#{bindings.ReasonCode.items}" id="si28"/>
+              </af:selectOneChoice>
+              <af:inputDate value="#{bindings.EffectiveStartDate.inputValue}"
+                            label="#{bindings.EffectiveStartDate.hints.label}"
+                            required="false"
+                            columns="#{bindings.EffectiveStartDate.displayWidth}"
+                            shortDesc="#{bindings.EffectiveStartDate.hints.tooltip}"
+                            id="id3" autoSubmit="true" disabled="true">
+                <f:validator binding="#{bindings.EffectiveStartDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.EffectiveStartDate.format}"/>
+              </af:inputDate>
+              <af:inputDate value="#{bindings.EffectiveEndDate.inputValue}"
+                            label="#{bindings.EffectiveEndDate.hints.label}"
+                            required="false"
+                            columns="#{bindings.EffectiveEndDate.displayWidth}"
+                            shortDesc="#{bindings.EffectiveEndDate.hints.tooltip}"
+                            id="id4" autoSubmit="true" disabled="true">
+                <f:validator binding="#{bindings.EffectiveEndDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.EffectiveEndDate.format}"/>
+              </af:inputDate>
+                <f:facet name="footer">
+                  <af:panelGroupLayout id="pgl10" halign="left"
+                                       layout="horizontal" valign="bottom"
+                                       inlineStyle="height:43px; width:450px;">
+                    <af:spacer id="s16" width="20px" height="15px"/>
+                    <af:commandButton text="Save Grade Step Placement" id="cb1"
+                                      action="#{pageFlowScope.AssignmentCreateBean.saveGradeStepPlacementDetails}"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelFormLayout>
+            </af:panelHeader>
+            <af:panelHeader text="Special Ceiling" id="ph4"
+                            styleClass="borderedHeader">
+              <af:selectOneChoice value="#{bindings.SpecialCeilingStepId.inputValue}"
+                                  label="#{bindings.SpecialCeilingStepId.label}"
+                                  required="#{bindings.SpecialCeilingStepId.hints.mandatory}"
+                                  shortDesc="#{bindings.SpecialCeilingStepId.hints.tooltip}"
+                                  id="soc13" autoSubmit="true">
+                <f:selectItems value="#{bindings.SpecialCeilingStepId.items}"
+                               id="si21"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.SpecialCeilingStep.inputValue}"
+                            label="#{bindings.SpecialCeilingStep.hints.label}"
+                            required="#{bindings.SpecialCeilingStep.hints.mandatory}"
+                            columns="#{bindings.SpecialCeilingStep.hints.displayWidth}"
+                            maximumLength="#{bindings.SpecialCeilingStep.hints.precision}"
+                            shortDesc="#{bindings.SpecialCeilingStep.hints.tooltip}"
+                            id="it31" partialTriggers="soc13" disabled="true">
+                <f:validator binding="#{bindings.SpecialCeilingStep.validator}"/>
+              </af:inputText>
+            </af:panelHeader>
+          </af:panelGroupLayout>
+          <af:panelGroupLayout id="pgl6" layout="horizontal" halign="right">
+            <af:commandButton text="Save" id="cb10"
+                              action="#{pageFlowScope.AssignmentCreateBean.assignmentRecordSave}"/>
+          </af:panelGroupLayout>
+          <af:spacer width="10" height="10" id="s28"/>
+        </af:panelGroupLayout>
+      </af:showDetailItem>
+      <!--  End :: Create Assignment :: Salary Information and Special Celling   -->
+      <!--  Start :: Create Assignment :: Assignment Date Track History   -->
+      <af:showDetailItem text="Assignment Date Track History" id="sdi7"
+                         disabled="#{pageFlowScope.AssignmentCreateBean.showDetailItemIsDisable}">
+        <af:table value="#{bindings.DateTrackHistoryVO1.collectionModel}"
+                  var="row" rows="#{bindings.DateTrackHistoryVO1.rangeSize}"
+                  emptyText="#{bindings.DateTrackHistoryVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  fetchSize="#{bindings.DateTrackHistoryVO1.rangeSize}"
+                  rowBandingInterval="0" width="1600px"
+                  selectedRowKeys="#{bindings.DateTrackHistoryVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.DateTrackHistoryVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" id="t2">
+          <af:column sortable="false" headerText="Effective Flag" id="c27">
+            <!-- <af:outputText value="#{row.PeopleEffStartDate}" id="ot28" />-->
+            <af:selectBooleanCheckbox text="" label="" id="sbc4"
+                                      value="#{ (row.AssignmentEffEndDate le pageFlowScope.AssignmentCreateBean.currentDate) ? false : true}"/>
+          </af:column>
+          <!-- <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PeopleEffStartDate.name}"
+                     sortable="false"
+                     headerText="From Date"
+                     id="c30">
+            <af:outputText value="#{row.PeopleEffStartDate}" id="ot11">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.PeopleEffStartDate.format}"/>
+            </af:outputText>
+          </af:column>-->
+          <!--  <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PeopleEffEndDate.name}"
+                     sortable="false"
+                     headerText="To Date"
+                     id="c11">
+            <af:outputText value="#{row.PeopleEffEndDate}" id="ot24">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.PeopleEffEndDate.format}"/>
+            </af:outputText>
+          </af:column>-->
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.AssignmentEffStartDate.name}"
+                     sortable="false" headerText="From Date" id="c26">
+            <af:outputText value="#{row.AssignmentEffStartDate}" id="ot5">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.AssignmentEffStartDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.AssignmentEffEndDate.name}"
+                     sortable="false" headerText="To Date" id="c6">
+            <af:outputText value="#{row.AssignmentEffEndDate}" id="ot22">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.AssignmentEffEndDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <!-- <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.AssignmentId.name}"
+                     sortable="false"
+                     headerText="#{bindings.DateTrackHistoryVO1.hints.AssignmentId.label}"
+                     id="c20">
+            <af:outputText value="#{row.AssignmentId}" id="ot8"/>
+          </af:column>-->
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.ChangeReason.name}"
+                     sortable="false" headerText="Change Reason" id="c21">
+            <af:outputText value="#{row.ChangeReason}" id="ot9"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.LastUpdateDate.name}"
+                     sortable="false" headerText="Last Update Date" id="c14">
+            <af:outputText value="#{row.LastUpdateDate}" id="ot19">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.LastUpdateDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.NormalHours.name}"
+                     sortable="false" headerText="Normal Hours" id="c31">
+            <af:outputText value="#{row.NormalHours}" id="ot23"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.WorkingHoursFrequency.name}"
+                     sortable="false" headerText="Working Hours Frequency"
+                     id="c12">
+            <af:outputText value="#{row.WorkingHoursFrequency}" id="ot12"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PositionName.name}"
+                     sortable="false" headerText="Position" id="c5">
+            <af:outputText value="#{row.PositionName}" id="ot30"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.OrganizationName.name}"
+                     sortable="false" headerText="Organization" id="c17">
+            <af:outputText value="#{row.OrganizationName}" id="ot20"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PrimaryFlag.name}"
+                     sortable="false" headerText="Primary" id="c13">
+            <af:outputText value="#{row.PrimaryFlag}" id="ot28"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.UserStatus.name}"
+                     sortable="false" headerText="Status" id="c15">
+            <af:outputText value="#{row.UserStatus}" id="ot27"/>
+          </af:column>
+          <!--  need to add Employment Category -->
+          <af:column headerText="EmploymentCategory" id="c1">
+            <af:outputText value="#{row.EmploymentCategory}" id="ot3"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.GradeName.name}"
+                     sortable="false" headerText="Grade" id="c4">
+            <af:outputText value="#{row.GradeName}" id="ot31"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.LocationCode.name}"
+                     sortable="false" headerText="Location" id="c32">
+            <af:outputText value="#{row.LocationCode}" id="ot25"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PayrollName.name}"
+                     sortable="false" headerText="Payroll" id="c9">
+            <af:outputText value="#{row.PayrollName}" id="ot15"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.PeopleGroup.name}"
+                     sortable="false" headerText="People Group" id="c8">
+            <af:outputText value="#{row.PeopleGroup}" id="ot14"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.Supervisor.name}"
+                     sortable="false" headerText="Supervisor" id="c22">
+            <af:outputText value="#{row.Supervisor}" id="ot26"/>
+          </af:column>
+          <!--  need to add salary basic -->
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.Manager.name}"
+                     sortable="false" headerText="Manager" id="c29">
+            <af:outputText value="#{row.Manager}" id="ot16"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.SpecialCeilingStepId.name}"
+                     sortable="false" headerText="Special Ceiling" id="c19">
+            <af:outputText value="#{row.SpecialCeilingStepId}" id="ot32"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.NormalEndTime.name}"
+                     sortable="false" headerText="Normal End Time" id="c28">
+            <af:outputText value="#{row.NormalEndTime}" id="ot33"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.NormalStartTime.name}"
+                     sortable="false" headerText="Normal Start Time" id="c25">
+            <af:outputText value="#{row.NormalStartTime}" id="ot18"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.ProbationEndDate.name}"
+                     sortable="false" headerText="Probation End Date" id="c18">
+            <af:outputText value="#{row.ProbationEndDate}" id="ot34">
+              <af:convertDateTime pattern="#{bindings.DateTrackHistoryVO1.hints.ProbationEndDate.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.ProbationPeriod.name}"
+                     sortable="false" headerText="Probation Period" id="c23">
+            <af:outputText value="#{row.ProbationPeriod}" id="ot13"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.ProbationUnit.name}"
+                     sortable="false" headerText="Probation Units" id="c10">
+            <af:outputText value="#{row.ProbationUnit}" id="ot17"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.RecruitmentActivityId.name}"
+                     sortable="false" headerText="Recruitment Activity"
+                     id="c24">
+            <af:outputText value="#{row.RecruitmentActivityId}" id="ot21"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.VacancyId.name}"
+                     sortable="false" headerText="Vacancy" id="c16">
+            <af:outputText value="#{row.VacancyId}" id="ot10"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.DateTrackHistoryVO1.hints.LastUpdatedBy.name}"
+                     sortable="false" headerText="Last Updated By" id="c7">
+            <af:outputText value="#{row.LastUpdatedBy}" id="ot29"/>
+          </af:column>
+        </af:table>
+      </af:showDetailItem>
+      <!--  End :: Create Assignment :: Assignment Date Track History   -->
+    </af:panelAccordion>
+    <af:panelGroupLayout id="pgl1" layout="horizontal">
+      <af:spacer width="200" height="50" id="s6"/>
+      <af:commandLink text="Element Entries - Payroll Version." id="cl3"
+                      visible="#{sessionScope.PayrollVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.elementEntriesPayrollVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="30" height="10" id="s7"/>
+      <af:commandLink text="Element Entries - HR Version." id="cl2"
+                      visible="#{sessionScope.HRVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.elementEntriesHRVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="30" height="10" id="s4"/>
+      <af:commandLink text="Tax Information - Payroll Version." id="cl4"
+                      visible="#{sessionScope.PayrollVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.taxInformationPayrollVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="30" height="10" id="s8"/>
+      <af:commandLink text="Pay Method - Payroll Version." id="cl5"
+                      visible="#{sessionScope.PayrollVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.payMethodPayrollVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="30" height="10" id="s9"/>
+      <af:commandLink text="Costing  - HR Version." id="cl7"
+                      visible="#{sessionScope.HRVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.costingHRVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="30" height="10" id="s21"/>
+      <af:commandLink text="Quick Pay - Payroll Version." id="cl6"
+                      visible="#{sessionScope.PayrollVersion}" immediate="true"
+                      actionListener="#{pageFlowScope.CoreFormNavigationBean.quickPayPayrollVersion}"
+                      disabled="#{pageFlowScope.AssignmentCreateBean.coreFormNavigationLinkIsDisable}"/>
+      <af:spacer width="500" height="50" id="s19"/>
+      <af:commandButton id="cb8" text="Back to Assignment Search"
+                        immediate="true"
+                        action="#{pageFlowScope.AssignmentCreateBean.backToAssignmentSearchPage}"/>
+      <af:spacer width="10" height="10" id="s20"/>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="pgl14">
+      <af:popup id="p1"
+                binding="#{pageFlowScope.AssignmentCreateBean.nhsPeopleGroupKFFPopup}">
+        <af:dialog type="okCancel" id="d2" title="NHS People Group Flexfield"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.dialogListenerKFFGroup}">
+          <af:panelGroupLayout id="pgl7" layout="vertical" halign="right">
+            <af:selectOneChoice value="#{bindings.PaypointLOVVO1.inputValue}"
+                                label="Paypoint" required="true"
+                                contentStyle="width:250.00px;height:18px;"
+                                id="soc15"
+                                binding="#{pageFlowScope.AssignmentCreateBean.payPointLOVBind}">
+              <f:selectItems value="#{bindings.PaypointLOVVO1.items}"
+                             id="si23"/>
+            </af:selectOneChoice>
+            <af:spacer id="s26" width="10" height="10"/>
+            <af:selectOneChoice value="#{bindings.ExpenseUserTypeLOVVO1.inputValue}"
+                                label="Expense User Type"
+                                contentStyle="width:250.00px;height:18px;"
+                                id="soc16">
+              <f:selectItems value="#{bindings.ExpenseUserTypeLOVVO1.items}"
+                             id="si26"/>
+            </af:selectOneChoice>
+            <af:spacer id="s2" width="10" height="10"/>
+            <af:selectOneChoice value="#{bindings.TimeAndAttendanceLOVVO1.inputValue}"
+                                label="Time and Attendance"
+                                contentStyle="width:250.00px;height:18px;"
+                                id="soc17">
+              <f:selectItems value="#{bindings.TimeAndAttendanceLOVVO1.items}"
+                             id="si24"/>
+            </af:selectOneChoice>
+            <af:spacer id="s14" width="10" height="10"/>
+            <af:selectOneChoice value="#{bindings.DataEntryGroupLOVVO1.inputValue}"
+                                label="Data Entry Group"
+                                contentStyle="width:250.00px;height:18px;"
+                                id="soc20">
+              <f:selectItems value="#{bindings.DataEntryGroupLOVVO1.items}"
+                             id="si25"/>
+            </af:selectOneChoice>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p3"
+                binding="#{pageFlowScope.AssignmentCreateBean.errorPopup}">
+        <af:dialog id="d3" type="ok" title="">
+          <af:outputText id="ot41"
+                         value="#{pageFlowScope.AssignmentCreateBean.errorMessage}"></af:outputText>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p4"
+                binding="#{pageFlowScope.AssignmentCreateBean.defaultValuePositionPopup}">
+        <af:dialog id="d5" type="none" contentWidth="800">
+          <af:panelGroupLayout id="pgl21" layout="vertical">
+            <af:outputText value="You have selected a different position. Where the new position has default values for one or
+                                more of the following, and they are applicable to the current Person Type, your
+                                position will adopt these values: Grades, Payroll, Supervisor, Probation Period,
+                                Salary and Pay Basis." id="ot36"/>
+            <af:spacer id="s10" height="2" width="2"/>
+            <af:outputText value="Do you want to accept the default values for this positioin ?"
+                           id="ot37"/>
+            <af:spacer id="s13" height="20" width="20"/>
+            <af:panelGroupLayout id="pgl16" layout="horizontal">
+              <af:commandButton text="Yes" id="cb11"
+                                actionListener="#{pageFlowScope.AssignmentCreateBean.defaultValueSetForPosition}"/>
+              <af:spacer id="s17" height="10" width="10"/>
+              <af:commandButton text="No" id="cb12"
+                                actionListener="#{pageFlowScope.AssignmentCreateBean.defaultValueClosePopupForPosition}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p5"
+                binding="#{pageFlowScope.AssignmentCreateBean.standardConditionForPositionPopup}">
+        <af:dialog id="d6" type="yesNo"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.standardConditionsPositionDialogueListener}">
+          <af:outputText value="Do you want use standard conditions for new positions ?"
+                         id="ot38"/>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p6"
+                binding="#{pageFlowScope.AssignmentCreateBean.locationForPositioinPopupBind}">
+        <af:dialog id="d7" type="yesNo"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.locationForPositionDialogueListener}">
+          <af:outputText value="Do you want use location of the new positions ?"
+                         id="ot39"/>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p10"
+                binding="#{pageFlowScope.AssignmentCreateBean.changeReasonPopUpBind}">
+        <af:dialog id="d11" type="yesNo" title="Decision"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.changeReasonDialogListener}">
+          <af:panelGroupLayout id="pgl17" layout="vertical">
+            <af:outputText value="A change has been made to the person's assignment details, ensure that an appropriate assignment change reason has been selected. Update reason now ?"
+                           id="ot40"/>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="orgPopup"
+                binding="#{pageFlowScope.AssignmentCreateBean.locationConfirmationPopup}">
+        <af:dialog id="d4" type="yesNo"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.locationConfirmationDialogListener}">
+          <af:outputText value="Do you want to set the default location of the organization?"
+                         id="ot7"/>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p2"
+                binding="#{pageFlowScope.AssignmentCreateBean.updateAndCorreectionPopupBind}">
+        <af:dialog id="d1" type="none" title="Choose an option:">
+          <af:panelGroupLayout id="pgl23" layout="vertical">
+            <af:panelGroupLayout id="pgl24" layout="horizontal">
+              <af:commandButton text="Update" id="cb9"
+                                action="#{pageFlowScope.AssignmentCreateBean.updateModeSetting}"/>
+              <af:spacer id="s38" height="10" width="10"/>
+              <af:outputText value="Keep history of existing information"
+                             id="ot6"/>
+            </af:panelGroupLayout>
+            <af:spacer id="s40" height="20" width="20"/>
+            <af:panelGroupLayout id="pgl25" layout="horizontal">
+              <af:commandButton text="Correction" id="cb15"
+                                action="#{pageFlowScope.AssignmentCreateBean.correctionModeSetting}"/>
+              <af:spacer id="s39" height="10" width="10"/>
+              <af:outputText value="Correct existing information" id="ot4"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p11"
+                binding="#{pageFlowScope.AssignmentCreateBean.payrollChangePopUpBind}">
+        <af:dialog id="d12" type="none" title="Choose an option:">
+          <af:panelGroupLayout id="pgl30" layout="vertical">
+            <af:panelGroupLayout id="pgl33">
+                  <af:outputText value="You must replace future assignment changes when changing the payroll."
+                             id="ot43"/>            
+            </af:panelGroupLayout>
+            <af:panelGroupLayout id="pgl32" layout="horizontal">
+              <af:commandButton text="OK" id="cb2"
+                                action="#{pageFlowScope.AssignmentCreateBean.setOldPayrollValue}"/>
+              <af:spacer id="s23" height="10" width="10"/> 
+              <af:commandButton text="Cancel" id="cb13"
+                                action="#{pageFlowScope.AssignmentCreateBean.closePayrollPopUp}"/>              
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p9"
+                binding="#{pageFlowScope.AssignmentCreateBean.updateAndCorrectionGradePopupBind}">
+        <af:dialog id="d10" type="none" title="Choose an option:">
+          <af:panelGroupLayout id="pgl13" layout="vertical">
+            <af:panelGroupLayout id="pgl29" layout="horizontal">
+              <af:commandButton text="Update" id="cb4"
+                                action="#{pageFlowScope.AssignmentCreateBean.gradeUpdateModeSet}"/>
+              <af:spacer id="s18" height="10" width="10"/>
+              <af:outputText value="Keep history of existing grade step placement information"
+                             id="ot24"/>
+            </af:panelGroupLayout>
+            <af:spacer id="s11" height="20" width="20"/>
+            <af:panelGroupLayout id="pgl31" layout="horizontal">
+              <af:commandButton text="Correction" id="cb18"
+                                action="#{pageFlowScope.AssignmentCreateBean.gradeCorrectionModeSet}"/>
+              <af:spacer id="s12" height="10" width="10"/>
+              <af:outputText value="Correct existing grade step placement information"
+                             id="ot42"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p8"
+                binding="#{pageFlowScope.AssignmentCreateBean.replaceAndInsertPopupBind}">
+        <af:dialog id="d9" type="none" title="Choose an option:">
+          <af:panelGroupLayout id="pgl26" layout="vertical">
+            <af:panelGroupLayout id="pgl28" layout="horizontal">
+              <af:commandButton text="Replace" id="cb16"
+                                action="#{pageFlowScope.AssignmentCreateBean.replaceModeSetting}"/>
+              <af:spacer id="s41" height="10" width="10"/>
+              <af:outputText value="Replace all scheduled changes" id="ot8"/>
+            </af:panelGroupLayout>
+            <af:spacer id="s42" height="20" width="20"/>
+            <af:panelGroupLayout id="pgl27" layout="horizontal">
+              <af:commandButton text="Insert" id="cb17"
+                                action="#{pageFlowScope.AssignmentCreateBean.insertModeSetting}"/>
+              <af:spacer id="s43" height="10" width="10"/>
+              <af:outputText value="Insert this change before next scheduled change"
+                             id="ot11"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <af:popup id="p7"
+                binding="#{pageFlowScope.AssignmentCreateBean.updateModeChangerPopupBind}">
+        <af:dialog id="d8" type="okCancel"
+                   dialogListener="#{pageFlowScope.AssignmentCreateBean.updateModeChangerDialogListener}">
+          <af:panelGroupLayout id="pgl18" layout="vertical">
+            <af:outputText value="This record started today. Update mode changed to Correct."
+                           id="ot2"/>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

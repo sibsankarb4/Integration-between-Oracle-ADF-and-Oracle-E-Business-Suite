@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+<skin>
+<id>skyros_custom.desktop</id>
+<family>skyros_custom</family>
+<extends>skyros-v1.desktop</extends>
+<render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+<style-sheet-name>css/custom.css</style-sheet-name>
+</skin>
+</skins>

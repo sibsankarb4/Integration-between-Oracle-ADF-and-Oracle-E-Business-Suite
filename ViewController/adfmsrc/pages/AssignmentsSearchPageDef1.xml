@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="AssignmentsSearchPageDef1"
+                Package="pages">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AssignmentSearchVO1" RangeSize="10"
+              DataControl="NHS_AssignmentAppModuleDataControl"
+              id="AssignmentSearchVO1Iterator"/>
+    <searchRegion Criteria="AssignmentSearchVOCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="AssignmentSearchVO1Iterator"
+                  id="AssignmentSearchVOCriteriaQuery"/>
+    <iterator id="GradeStepPlacementVO1Iterator" Binds="GradeStepPlacementVO1"
+              DataControl="NHS_AssignmentAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AssignmentSearchVO1Iterator" id="AssignmentSearchVO1">
+      <nodeDefinition DefName="esr.nhs.vo.AssignmentSearchVO"
+                      Name="AssignmentSearchVO10">
+        <AttrNames>
+          <Item Value="PersonId"/>
+          <Item Value="NationalIdentifier"/>
+          <Item Value="EmployeeNumber"/>
+          <Item Value="PeopleEffStartDate"/>
+          <Item Value="PeopleEffEndDate"/>
+          <Item Value="AssignmentEffStartDate"/>
+          <Item Value="AssignmentEffEndDate"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="FullName"/>
+          <Item Value="PersonTypeId"/>
+          <Item Value="UserPersonType"/>
+          <Item Value="SystemPersonType"/>
+          <Item Value="AssignmentNumber"/>
+          <Item Value="AssignmentId"/>
+          <Item Value="OrganizationId"/>
+          <Item Value="OrganizationName"/>
+          <Item Value="JobId"/>
+          <Item Value="JobName"/>
+          <Item Value="PositionId"/>
+          <Item Value="PositionName"/>
+          <Item Value="GradeId"/>
+          <Item Value="GradeName"/>
+          <Item Value="LocationId"/>
+          <Item Value="LocationCode"/>
+          <Item Value="Group1"/>
+          <Item Value="PayrollId"/>
+          <Item Value="PayrollName"/>
+          <Item Value="AssignmentStatusTypeId"/>
+          <Item Value="UserStatus"/>
+          <Item Value="AssignmentCategory"/>
+          <Item Value="AsgCategoryMeaning"/>
+          <Item Value="EmployeeCategory"/>
+          <Item Value="EmpCategoryMeaning"/>
+          <Item Value="NhsJobApplRef"/>
+          <Item Value="ChangeReason"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="VacancyId"/>
+          <Item Value="WorkingHours"/>
+          <Item Value="FixedTermEndDate"/>
+          <Item Value="FixedTermReason"/>
+          <Item Value="LocalEmpContract"/>
+          <Item Value="NewDeal"/>
+          <Item Value="JobSharer"/>
+          <Item Value="NightWorker"/>
+          <Item Value="FlexibleWorkingPattern"/>
+          <Item Value="AvgWorkingDaysPerweek"/>
+          <Item Value="MaximumParttime"/>
+          <Item Value="FoundationGatewayDate"/>
+          <Item Value="AbsAccrualStartDate"/>
+          <Item Value="StartDateGrade"/>
+          <Item Value="IncrementaDate"/>
+          <Item Value="BankProposIncDate"/>
+          <Item Value="NoOfIncrements"/>
+          <Item Value="DeptMgrOverride"/>
+          <Item Value="MonitorChanges"/>
+          <Item Value="OverrideStdGradeHours"/>
+          <Item Value="OverrideStdGradeOtRate"/>
+          <Item Value="OverrideStdGradeOtHours"/>
+          <Item Value="UpliftedRateChDt"/>
+          <Item Value="ExitQuestionerReq"/>
+          <Item Value="PayslipToHome"/>
+          <Item Value="AccomidationStatus"/>
+          <Item Value="Funding1"/>
+          <Item Value="Funding1Percent"/>
+          <Item Value="Funding2"/>
+          <Item Value="Funding2Percent"/>
+          <Item Value="Frequency"/>
+          <Item Value="TimeNormalStart"/>
+          <Item Value="TimeNormalFinish"/>
+          <Item Value="HourlySalariedCode"/>
+          <Item Value="NoticePeriodLength"/>
+          <Item Value="NoticePeriodUnits"/>
+          <Item Value="WorkAtHome"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="GradeStepPlacementVO1Iterator"
+            id="CreateInsertGradeStep"
+            InstanceName="NHS_AssignmentAppModuleDataControl.GradeStepPlacementVO1"
+            DataControl="NHS_AssignmentAppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

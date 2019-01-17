@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+       <page path="/pages/AssignmentsSearch.jsff"
+          usageId="view_AssignmentsSearchPageDef1"/>
+    <page path="/nhs/assignment/dashboards/AssignmentsDashBoard.jspx"
+          usageId="view_AssignmentsDashBoardPageDef"/>
+    <page path="/pages/CreateAssignmentForm.jsff"
+          usageId="view_CreateAssignmentFormPageDef"/>
+    <page path="/nhs/assignment/test/CreateAssignmentTest.jspx"
+          usageId="view_CreateAssignmentTestPageDef"/>
+    <page path="/pages/CreateSupervisor.jsff" usageId="view_CreateSupervisorPageDef"/>
+    <page path="/pages/AssignmentForm.jsff"
+          usageId="view_updateAssignmentFormPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_AssignmentsSearchPageDef1"
+          path="pages.AssignmentsSearchPageDef1"/>
+    <page id="view_AssignmentsDashBoardPageDef"
+          path="nhs.assignment.dashboards.AssignmentsDashBoardPageDef"/>
+    <page id="view_CreateAssignmentFormPageDef"
+          path="pages.CreateAssignmentFormPageDef"/>
+    <page id="view_CreateAssignmentTestPageDef"
+          path="nhs.assignment.test.CreateAssignmentTestPageDef"/>
+    <page id="view_CreateSupervisorPageDef"
+          path="view.pageDefs.CreateSupervisorPageDef"/>
+    <page id="view_updateAssignmentFormPageDef"
+          path="pages.updateAssignmentFormPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="NHS_AssignmentAppModuleDataControl"
+                     Package="esr.nhs.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="NHS_AssignmentAppModuleLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="NHS_AssignmentAppModuleDataControl1"
+                     Package="xxassigndm.model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="NHS_AssignmentsAppModuleLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

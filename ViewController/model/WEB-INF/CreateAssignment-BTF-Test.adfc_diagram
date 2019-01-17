@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">CreateAssignmentForm</property>
+      <property
+         name="page">/pages/CreateAssignmentForm.jsff</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CreateAssignmentForm&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">223.79883</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">293.3545</property>
+   </View>
+</SDM>

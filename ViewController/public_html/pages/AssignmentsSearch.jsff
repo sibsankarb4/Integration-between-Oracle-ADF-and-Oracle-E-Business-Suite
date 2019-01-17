@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout layout="vertical" id="pgl12"
+                       inlineStyle="border:1px solid #6699cc;">
+    <af:panelHeader text="Assignment Search Form" id="ph3">
+      <af:panelGroupLayout layout="vertical" id="pgl22">
+        <af:spacer width="20" height="10" id="s12"/>
+        <af:inputDate label="Effective Date" id="id1" columns="12"
+                      autoSubmit="true" contentStyle="width:175px"
+                      binding="#{pageFlowScope.AssignmentSearchBean.effectiveDateBinding}"
+                      valueChangeListener="#{pageFlowScope.AssignmentSearchBean.effectiveDateChangeListener}">
+          <af:convertDateTime messageDetailConvertDate="Insert a date"
+                              pattern="dd-MMM-yyyy"
+                              hintDate="Example: DD-MON-YYYY"/>
+        </af:inputDate>
+        <af:outputText value="You can change this date to either past or future date to perform date tracked transaction."
+                       id="ot8" inlineStyle="font-style:italic; color:Blue;"/>
+      </af:panelGroupLayout>
+    </af:panelHeader>
+    <af:panelGroupLayout id="pgl32" >
+      <af:panelHeader text="" id="ph1">
+        <af:query id="qryId1" headerText="Enter Search Criteria"
+                  disclosed="true" resetButtonText="Clear"
+                  saveQueryMode="hidden" modeChangeVisible="false"
+                  value="#{bindings.AssignmentSearchVOCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.AssignmentSearchVOCriteriaQuery.queryModel}"
+                  queryOperationListener="#{bindings.AssignmentSearchVOCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::resId1" displayMode="compact"
+                  inlineStyle="float:left; padding-right:1200.0px;"
+                  maxColumns="1" rows="1"
+                  queryListener="#{pageFlowScope.AssignmentSearchBean.customAssignmentSearch}"/>
+      </af:panelHeader>
+    </af:panelGroupLayout>
+    <af:panelHeader text="" id="ph2" inlineStyle="border:1px solid #6699cc;">
+      <af:table value="#{bindings.AssignmentSearchVO1.collectionModel}"
+                width="1350px" summary="search table" var="row"
+                rows="#{bindings.AssignmentSearchVO1.rangeSize}"
+                emptyText="#{bindings.AssignmentSearchVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.AssignmentSearchVO1.rangeSize}"
+                rowBandingInterval="1" autoHeightRows="0" scrollPolicy="page"
+                selectedRowKeys="#{bindings.AssignmentSearchVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.AssignmentSearchVO1.collectionModel.makeCurrent}"
+                rowSelection="single" id="resId1" horizontalGridVisible="true"
+                verticalGridVisible="true" columnStretching="multiple"
+                contentDelivery="immediate" partialTriggers="::cb1 ::qryId1">
+        <af:column sortProperty="false" width="70px" sortable="false"
+                   headerText="Primary Asg." id="resId1c1">
+          <!-- <af:outputText value="#{row.PrimaryFlag}" id="ot7"/>-->
+          <af:selectBooleanCheckbox text="" label="" id="sbc1"
+                                    value="#{row.PrimaryFlag != 'Y' ? false : true}"/>
+        </af:column>
+        <af:column sortProperty="false" width="100px" sortable="false"
+                   headerText="Assignment Number" id="resId1c2">
+          <af:outputText value="#{row.AssignmentNumber}" id="ot5"/>
+        </af:column>
+        <af:column sortProperty="false" width="200px" sortable="false"
+                   headerText="Full Name" id="resId1c3">
+          <af:outputText value="#{row.FullName}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="false" width="80px" sortable="false"
+                   headerText="Date Of Birth" id="resId1c4">
+          <af:outputText value="#{row.DateOfBirth}" id="ot4">
+            <af:convertDateTime pattern="#{bindings.AssignmentSearchVO1.hints.DateOfBirth.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="false" width="160px" sortable="false"
+                   headerText="Department" id="resId1c5">
+          <af:outputText value="#{row.OrganizationName}" id="ot11"/>
+        </af:column>
+        <af:column sortProperty="false" width="195px" sortable="false"
+                   headerText="Job" id="resId1c6">
+          <af:outputText value="#{row.JobName}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="false" width="110px" sortable="false"
+                   headerText="Position" id="resId1c7">
+          <af:outputText value="#{row.PositionName}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="false" width="100px" sortable="false"
+                   headerText="Grade" id="resId1c8">
+          <af:outputText value="#{row.GradeName}" id="ot9">
+           <!-- <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AssignmentSearchVO1.hints.GradeId.format}"/>-->
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="false" width="100px" sortable="false"
+                   headerText="Location" id="resId1c9">
+          <af:outputText value="#{row.LocationCode}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="false" width="115px" sortable="false"
+                   headerText="Status" id="resId1c10">
+          <af:outputText value="#{row.UserStatus}" id="ot12"/>
+        </af:column>
+        <af:column sortable="false" headerText="Update" id="resId1c11"
+                   width="40">
+          <af:commandImageLink id="cl1" icon="/images/edit.jpg"
+                               action="#{pageFlowScope.AssignmentCreateBean.updateAssignment}">
+           
+          </af:commandImageLink>
+        </af:column>
+      </af:table>
+    </af:panelHeader>
+    <af:panelHeader id="pgl42" text="">
+      <af:panelGroupLayout id="pgl1" layout="horizontal">
+       <af:commandButton  text="Add New Assignment"
+                          disabled="#{bindings.AssignmentSearchVO1.estimatedRowCount eq 0}"
+                          binding="#{pageFlowScope.AssignmentSearchBean.createAssignmentButtonBind}"
+                          action="#{pageFlowScope.AssignmentCreateBean.createNewAssignmentNavigation}"
+                          partialTriggers="qryId1"
+                         id="cb1">
+         <!-- <af:clientListener type="action" method="createAssignment"/>-->
+        </af:commandButton>
+        <af:spacer width="10" height="0" id="s3"/>
+        <af:commandButton id="ctb1" text="Export to Excel"
+                          disabled="#{bindings.AssignmentSearchVO1.estimatedRowCount eq 0}"
+                          binding="#{pageFlowScope.AssignmentSearchBean.exportButtonBind}"
+                          partialTriggers="qryId1">
+          <af:exportCollectionActionListener exportedId="resId1"
+                                             type="excelHTML"
+                                             filename="AssignmentDetails.xls"
+                                             title="Assignment Details List"/>
+        </af:commandButton>
+      </af:panelGroupLayout>
+    </af:panelHeader>
+  </af:panelGroupLayout>
+</jsp:root>
